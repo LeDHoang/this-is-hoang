@@ -4,6 +4,12 @@ import * as React from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
+import { useState } from "react"
+import { ChevronDown, ChevronUp, ExternalLink } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
 
 const categories = ["Machine Learning", "Data Science", "Web Design", "Photography"]
 
@@ -47,6 +53,8 @@ const projects = [
 ]
 
 export function Projects() {
+  const [expandedCard, setExpandedCard] = useState<string | null>(null)
+
   return (
     <section className="space-y-6">
       <h2 className="text-3xl font-bold">Projects</h2>
@@ -68,43 +76,82 @@ export function Projects() {
         {categories.map((category) => (
           <TabsContent key={category} value={category} className="mt-6">
             <ScrollArea className="w-full">
-              <div className="flex space-x-4 pb-4">
+              <div className="flex space-x-4 pb-4 snap-x snap-mandatory">
                 {projects
                   .filter((project) => project.category === category)
                   .map((project) => (
-                    <Card key={project.title} className="w-[350px] flex-shrink-0">
+                    <Card 
+                      key={project.title} 
+                      className={cn(
+                        "w-[350px] flex-shrink-0 snap-start transition-all duration-300",
+                        expandedCard === project.title && "w-[600px]"
+                      )}
+                    >
                       <CardHeader>
-                        <CardTitle>{project.title}</CardTitle>
-                        <CardDescription>{project.date}</CardDescription>
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <CardTitle>{project.title}</CardTitle>
+                            <CardDescription>{project.date}</CardDescription>
+                          </div>
+                          <Button
+                            variant="ghost"
+                            size="icon"
+                            onClick={() => setExpandedCard(expandedCard === project.title ? null : project.title)}
+                            className="h-8 w-8"
+                          >
+                            {expandedCard === project.title ? (
+                              <ChevronUp className="h-4 w-4" />
+                            ) : (
+                              <ChevronDown className="h-4 w-4" />
+                            )}
+                          </Button>
+                        </div>
                       </CardHeader>
                       <CardContent>
-                        <p className="text-sm text-muted-foreground mb-4">{project.summary}</p>
-                        <div className="space-y-2">
+                        <div className="space-y-4">
+                          <p className="text-sm text-muted-foreground">{project.summary}</p>
                           <div className="flex flex-wrap gap-2">
                             {project.techStack.map((tech) => (
-                              <span
-                                key={tech}
-                                className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium"
-                              >
+                              <Badge key={tech} variant="secondary">
                                 {tech}
-                              </span>
+                              </Badge>
                             ))}
                           </div>
-                          <div className="space-y-1">
-                            {project.achievements.map((achievement) => (
-                              <p key={achievement} className="text-sm">
-                                • {achievement}
-                              </p>
-                            ))}
+                          
+                          {expandedCard === project.title && (
+                            <div className="space-y-4 pt-4">
+                              <Separator />
+                              <div className="space-y-2">
+                                <h4 className="font-semibold">Progress Logs</h4>
+                                <div className="space-y-2">
+                                  {project.logs.map((log) => (
+                                    <div key={log.date} className="text-sm">
+                                      <span className="font-medium">{log.date}:</span> {log.note}
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                              <div className="space-y-2">
+                                <h4 className="font-semibold">Achievements</h4>
+                                <ul className="list-disc list-inside space-y-1 text-sm">
+                                  {project.achievements.map((achievement) => (
+                                    <li key={achievement}>{achievement}</li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+                          )}
+                          
+                          <div className="flex justify-end">
+                            <a
+                              href={project.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="inline-flex items-center text-sm text-primary hover:underline"
+                            >
+                              View Project <ExternalLink className="ml-1 h-4 w-4" />
+                            </a>
                           </div>
-                          <a
-                            href={project.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-sm text-primary hover:underline"
-                          >
-                            View Project →
-                          </a>
                         </div>
                       </CardContent>
                     </Card>

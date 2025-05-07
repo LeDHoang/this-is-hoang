@@ -1,8 +1,13 @@
 "use client"
 
 import * as React from "react"
+import { useState } from "react"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
+import { ChevronDown, ChevronUp } from "lucide-react"
+import { cn } from "@/lib/utils"
+import { Badge } from "@/components/ui/badge"
+import { Separator } from "@/components/ui/separator"
 
 const experiences = [
   {
@@ -46,50 +51,74 @@ const experiences = [
 ]
 
 export function Experience() {
+  const [expandedCard, setExpandedCard] = useState<string | null>(null)
+
   return (
     <section className="space-y-6">
       <h2 className="text-3xl font-bold">Experience</h2>
       <div className="space-y-8">
         {experiences.map((experience) => (
-          <Card key={experience.role} className="relative">
+          <Card 
+            key={experience.role} 
+            className={cn(
+              "relative transition-all duration-300",
+              expandedCard === experience.role && "ring-2 ring-primary"
+            )}
+          >
             <CardHeader>
-              <CardTitle>{experience.role}</CardTitle>
-              <CardDescription>
-                {experience.company} • {experience.period}
-              </CardDescription>
-              <CardDescription>{experience.location}</CardDescription>
+              <div className="flex justify-between items-start">
+                <div>
+                  <CardTitle>{experience.role}</CardTitle>
+                  <CardDescription>
+                    {experience.company} • {experience.period}
+                  </CardDescription>
+                  <CardDescription>{experience.location}</CardDescription>
+                </div>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setExpandedCard(expandedCard === experience.role ? null : experience.role)}
+                  className="h-8 w-8"
+                >
+                  {expandedCard === experience.role ? (
+                    <ChevronUp className="h-4 w-4" />
+                  ) : (
+                    <ChevronDown className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <p className="text-muted-foreground">{experience.description}</p>
-              <div className="space-y-2">
-                <h4 className="font-semibold">Key Responsibilities:</h4>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  {experience.responsibilities.map((responsibility) => (
-                    <li key={responsibility}>{responsibility}</li>
-                  ))}
-                </ul>
+              <div className="flex flex-wrap gap-2">
+                {experience.techStack.map((tech) => (
+                  <Badge key={tech} variant="secondary">
+                    {tech}
+                  </Badge>
+                ))}
               </div>
-              <div className="space-y-2">
-                <h4 className="font-semibold">Tech Stack:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {experience.techStack.map((tech) => (
-                    <span
-                      key={tech}
-                      className="inline-flex items-center rounded-md bg-muted px-2 py-1 text-xs font-medium"
-                    >
-                      {tech}
-                    </span>
-                  ))}
+              
+              {expandedCard === experience.role && (
+                <div className="space-y-4 pt-4">
+                  <Separator />
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">Key Responsibilities</h4>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {experience.responsibilities.map((responsibility) => (
+                        <li key={responsibility}>{responsibility}</li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="space-y-2">
+                    <h4 className="font-semibold">Key Achievements</h4>
+                    <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                      {experience.achievements.map((achievement) => (
+                        <li key={achievement}>{achievement}</li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </div>
-              <div className="space-y-2">
-                <h4 className="font-semibold">Key Achievements:</h4>
-                <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                  {experience.achievements.map((achievement) => (
-                    <li key={achievement}>{achievement}</li>
-                  ))}
-                </ul>
-              </div>
+              )}
             </CardContent>
           </Card>
         ))}

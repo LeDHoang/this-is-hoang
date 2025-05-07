@@ -143,12 +143,12 @@ export function Contact() {
             <div>
               <h4 className="font-semibold mb-2">LinkedIn</h4>
               <a
-                href="https://linkedin.com/in/hoang-le"
+                href="https://www.linkedin.com/in/hoangleduc/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
               >
-                linkedin.com/in/hoang-le
+                www.linkedin.com/in/hoangleduc/
               </a>
             </div>
             <div>

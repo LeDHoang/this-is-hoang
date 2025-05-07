@@ -24,13 +24,13 @@ export function Bio() {
         <p className="text-muted-foreground">San Francisco, CA</p>
       </div>
       <div className="flex gap-4">
-        <Button variant="outline" asChild>
-          <a href="https://github.com/LeDHoang" target="_blank" rel="noopener noreferrer">
+        <Button variant="outline" asChild onClick={(e) => e.preventDefault()}>
+          <a href="https://github.com/LeDHoang" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             GitHub
           </a>
         </Button>
-        <Button variant="outline" asChild>
-          <a href="https://linkedin.com/in/hoang-le" target="_blank" rel="noopener noreferrer">
+        <Button variant="outline" asChild onClick={(e) => e.preventDefault()}>
+          <a href="https://www.linkedin.com/in/hoangleduc/" target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>
             LinkedIn
           </a>
         </Button>
