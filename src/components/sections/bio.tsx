@@ -61,8 +61,7 @@ export function Bio() {
             <p className="text-muted-foreground">Gainesville, FL</p>
           </div>
           <p className="text-muted-foreground">
-            I specialize in building intelligent systems and web applications, combining expertise in
-            machine learning, data science, and full-stack development to create impactful solutions.
+          Motivated Computer Science student with hands-on experience in Machine Learning, NLP, and Generative AI, specializing in building innovative, production-ready solutions. 
           </p>
           <div className="flex gap-4">
             <a 

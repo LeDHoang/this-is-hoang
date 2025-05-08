@@ -11,9 +11,22 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 
+interface Project {
+  title: string;
+  date: string;
+  category: string;
+  summary: string;
+  techStack: string[];
+  logs: { date: string; note: string }[];
+  achievements: string[];
+  link: string;
+  presentationLink?: string;
+  tableauLink?: string;
+}
+
 const categories = ["Machine Learning", "Data Science", "Web Design", "Photography"]
 
-const projects = [
+const projects: Project[] = [
   {
     title: "RAG-based PDF Query System for Healthcare Insurance",
     date: "Dec 2024",
@@ -49,6 +62,67 @@ const projects = [
       "User-configurable prompt refinement interface"
     ],
     link: "https://github.com/LeDHoang/DeepseekR1-Deep-Research-Agent"
+  },
+  {
+    title: "Tetouan City Machine Learning Project to Predict Power Consumption",
+    date: "Jun 2024",
+    category: "Machine Learning",
+    summary: "Produced a predictive model for power consumption in Tetouan City using Machine Learning in Python, leveraging weather and time-related variables such as diffuse flow from UCIML Repo.",
+    techStack: ["Python", "Pandas", "NumPy", "Scikit-learn", "AdaBoost Regression"],
+    logs: [
+      { date: "2024-04-15", note: "Collected and preprocessed Tetouan City power consumption dataset from UCIML" },
+      { date: "2024-05-01", note: "Performed exploratory data analysis; identified key weather and time variables" },
+      { date: "2024-05-20", note: "Implemented and compared multiple regression models (Linear, Random Forest, AdaBoost)" },
+      { date: "2024-06-10", note: "Optimized AdaBoost model hyperparameters; achieved 94.5% prediction accuracy" }
+    ],
+    achievements: [
+      "Achieved 94.5% accuracy with AdaBoost Regression",
+      "Identified key climate features impacting power consumption patterns"
+    ],
+    link: "https://github.com/raynardflores/powerhouse-squad-project"
+  },
+  {
+    title: "Vanguard A/B Testing for New User Interface",
+    date: "Jun 2024",
+    category: "Data Science",
+    summary: "Conducted a comprehensive analysis of client behavior and demographics in response to a new online process introduced by Vanguard Investing, using hypothesis testing to evaluate the effectiveness of UI changes.",
+    techStack: ["Python", "Pandas", "NumPy", "Jupyter Notebook", "Tableau", "Statistical Analysis"],
+    logs: [
+      { date: "2024-04-05", note: "Cleaned and prepared client data from multiple sources for analysis" },
+      { date: "2024-04-20", note: "Performed demographics analysis to identify primary client segments" },
+      { date: "2024-05-10", note: "Conducted behavioral analysis examining completion rates, time spent, and error rates" },
+      { date: "2024-05-25", note: "Applied hypothesis testing to evaluate significance of UI changes across user segments" },
+      { date: "2024-06-15", note: "Created Tableau visualizations to present actionable insights to stakeholders" }
+    ],
+    achievements: [
+      "Identified key demographic factors affecting UI interaction patterns",
+      "Developed statistical framework comparing control vs test group performance",
+      "Created comprehensive Tableau story visualizing test results and recommendations"
+    ],
+    link: "https://github.com/LeDHoang/Vanguard-AB-Testing",
+    presentationLink: "https://docs.google.com/presentation/d/1IPHWxKpB7MLiGPrA37Z9vrTbxNYbdTQoBFnrYyi0Ybo/edit?usp=sharing",
+    tableauLink: "https://public.tableau.com/app/profile/hoang.le.duc/viz/Book1_17176249007780/Dashboard5"
+  },
+  {
+    title: "Professional Soccer Analytics and Team Optimization",
+    date: "May 2024",
+    category: "Data Science",
+    summary: "Analyzed professional soccer database with 17k players and 2024 salary data scraped from Capology to find correlations between player statistics and compensation, then used linear programming to assemble optimal teams within budget constraints.",
+    techStack: ["Python", "Pandas", "NumPy", "Jupyter Notebook", "Web Scraping", "Linear Programming"],
+    logs: [
+      { date: "2024-03-10", note: "Collected and integrated player statistics from Kaggle dataset" },
+      { date: "2024-03-25", note: "Implemented web scraping solution to gather salary data from Capology" },
+      { date: "2024-04-08", note: "Performed statistical analysis on player performance vs. compensation" },
+      { date: "2024-04-20", note: "Developed linear programming model to optimize team selection within budget" },
+      { date: "2024-05-05", note: "Generated optimal team compositions for both value and rating optimization" }
+    ],
+    achievements: [
+      "Created algorithm to assemble best overall value team within budget constraints",
+      "Developed separate model to maximize team rating while respecting position requirements",
+      "Identified key performance metrics most correlated with player compensation"
+    ],
+    link: "https://github.com/LeDHoang/SportBetting-DataAnalytics",
+    presentationLink: "https://docs.google.com/presentation/d/1E6k73X7N5hKuSZwvaJ0WUkMo4LVOeAdtlrb1h8VqSOw/edit?usp=sharing"
   }
 ]
 
@@ -142,15 +216,35 @@ export function Projects() {
                             </div>
                           )}
                           
-                          <div className="flex justify-end">
+                          <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
                             <a
                               href={project.link}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center text-sm text-primary hover:underline"
+                              className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
                             >
-                              View Project <ExternalLink className="ml-1 h-4 w-4" />
+                              <span>View Project</span> <ExternalLink className="ml-1 h-4 w-4" />
                             </a>
+                            {project.presentationLink && (
+                              <a
+                                href={project.presentationLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
+                              >
+                                <span>Presentation</span> <ExternalLink className="ml-1 h-4 w-4" />
+                              </a>
+                            )}
+                            {project.tableauLink && (
+                              <a
+                                href={project.tableauLink}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
+                              >
+                                <span>Tableau Story</span> <ExternalLink className="ml-1 h-4 w-4" />
+                              </a>
+                            )}
                           </div>
                         </div>
                       </CardContent>
