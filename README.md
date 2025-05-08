@@ -10,7 +10,7 @@ A modern, responsive portfolio website built with Next.js, React, shadcn/ui, and
 - 📝 Project showcase with horizontal scrolling
 - 💼 Experience timeline
 - 🛠️ Skills visualization
-- 📬 Contact form with validation
+- 📬 Contact form with validation and toast notifications
 - 🔍 SEO optimized
 
 ## Tech Stack
@@ -22,6 +22,7 @@ A modern, responsive portfolio website built with Next.js, React, shadcn/ui, and
 - [shadcn/ui](https://ui.shadcn.com/) - UI components
 - [Zod](https://zod.dev/) - Form validation
 - [React Hook Form](https://react-hook-form.com/) - Form handling
+- [Sonner](https://sonner.emilkowal.ski/) - Toast notifications
 
 ## Getting Started
 
@@ -39,12 +40,16 @@ A modern, responsive portfolio website built with Next.js, React, shadcn/ui, and
 3. Add your profile image:
    - Place your profile image in the `public` directory as `profile.jpg`
 
-4. Start the development server:
+4. Configure environment variables:
+   - Create a `.env.local` file in the root directory
+   - Add any necessary API keys or configuration values
+
+5. Start the development server:
    ```bash
    npm run dev
    ```
 
-5. Open [http://localhost:3000](http://localhost:3000) in your browser.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Customization
 
@@ -59,8 +64,23 @@ A modern, responsive portfolio website built with Next.js, React, shadcn/ui, and
    - Adjust component styles in `src/components/ui/*`
 
 3. Configure contact form:
-   - Implement form submission in `src/components/sections/contact.tsx`
-   - Add your email service provider
+   - The contact form is set up with validation and toast notifications
+   - To enable actual form submission, uncomment and update the fetch code in `src/components/sections/contact.tsx`
+   - Add your email service provider or API endpoint
+
+## Project Structure
+
+```
+src/
+├── app/                 # Next.js app directory
+│   ├── layout.tsx      # Root layout with providers
+│   └── page.tsx        # Home page
+├── components/         # React components
+│   ├── sections/      # Page sections
+│   └── ui/            # UI components
+├── lib/               # Utility functions
+└── styles/            # Global styles
+```
 
 ## Deployment
 
@@ -77,3 +97,9 @@ MIT License - feel free to use this template for your own portfolio!
 ## Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
+
+## Acknowledgments
+
+- [shadcn/ui](https://ui.shadcn.com/) for the beautiful UI components
+- [Next.js](https://nextjs.org/) for the amazing framework
+- [Tailwind CSS](https://tailwindcss.com/) for the utility-first CSS framework
