@@ -11,41 +11,42 @@ import { Separator } from "@/components/ui/separator"
 
 const experiences = [
   {
-    role: "Senior Machine Learning Engineer",
-    company: "TechCorp AI",
-    period: "Jan 2023 - Present",
-    location: "San Francisco, CA",
-    description: "Leading the development of AI-powered solutions for enterprise clients, focusing on natural language processing and computer vision applications.",
+    id: "verifone",
+    role: "Machine Learning and AI Internship",
+    company: "Verifone",
+    period: "Aug 2024 - May 2025",
+    location: "FL, United States",
+    description: "Developed fraud detection models and streamlined ETL processes while collaborating with cross-functional teams.",
     responsibilities: [
-      "Architected and implemented scalable ML pipelines for processing large-scale datasets",
-      "Led a team of 5 engineers in developing and deploying ML models to production",
-      "Collaborated with product teams to define and implement AI features",
-      "Mentored junior engineers and conducted technical interviews"
+      "Designed and implemented a centralized, multi-site fraud detection model using Python, TensorFlow, and TCNN",
+      "Streamlined ETL processes and improved model efficiency with hyperparameter tuning via Optuna",
+      "Leveraged ClearML for performance evaluation and monitoring",
+      "Worked with diverse teams to integrate a user-friendly UI into the C-Suite system"
     ],
-    techStack: ["Python", "TensorFlow", "PyTorch", "AWS", "Docker", "Kubernetes"],
+    techStack: ["Python", "TensorFlow", "TCNN", "Optuna", "ClearML"],
     achievements: [
-      "Reduced model training time by 60% through distributed computing optimization",
-      "Achieved 95% accuracy in production ML models",
-      "Successfully deployed 10+ ML models to production"
+      "Boosted detection accuracy by 20%",
+      "Cut training time by 50% through hyperparameter optimization",
+      "Enhanced oversight and expedited anomaly detection across 16 sites"
     ]
   },
   {
-    role: "Machine Learning Engineer",
-    company: "DataFlow Systems",
-    period: "Mar 2020 - Dec 2022",
-    location: "Seattle, WA",
-    description: "Developed and maintained machine learning models for data processing and analysis pipelines.",
+    id: "its",
+    role: "Machine Learning and AI Internship",
+    company: "Institute of Technology and Science",
+    period: "May 2022 - July 2022",
+    location: "Ha Noi, Vietnam",
+    description: "Developed a facial identification system for touch-free COVID-safe applications.",
     responsibilities: [
-      "Implemented data preprocessing and feature engineering pipelines",
-      "Developed and optimized ML models for various business use cases",
-      "Collaborated with data scientists to improve model performance",
-      "Maintained and monitored production ML systems"
+      "Engineered a Python-based facial identification system using PyTorch and CNN",
+      "Curated a dataset of over 5000 facial keypoint photos from public sources and onsite volunteers",
+      "Optimized model performance for various lighting conditions and subjects"
     ],
-    techStack: ["Python", "scikit-learn", "Pandas", "NumPy", "SQL", "Git"],
+    techStack: ["Python", "PyTorch", "CNN"],
     achievements: [
-      "Improved model accuracy by 25% through feature engineering",
-      "Reduced data processing time by 40%",
-      "Implemented automated model monitoring system"
+      "Achieved 87% accuracy under diverse conditions",
+      "Outperformed existing systems by 10%",
+      "Created a comprehensive dataset for improved model training"
     ]
   }
 ]
@@ -59,10 +60,10 @@ export function Experience() {
       <div className="space-y-8">
         {experiences.map((experience) => (
           <Card 
-            key={experience.role} 
+            key={experience.id} 
             className={cn(
               "relative transition-all duration-300",
-              expandedCard === experience.role && "ring-2 ring-primary"
+              expandedCard === experience.id && "ring-2 ring-primary"
             )}
           >
             <CardHeader>
@@ -77,10 +78,10 @@ export function Experience() {
                 <Button
                   variant="ghost"
                   size="icon"
-                  onClick={() => setExpandedCard(expandedCard === experience.role ? null : experience.role)}
+                  onClick={() => setExpandedCard(expandedCard === experience.id ? null : experience.id)}
                   className="h-8 w-8"
                 >
-                  {expandedCard === experience.role ? (
+                  {expandedCard === experience.id ? (
                     <ChevronUp className="h-4 w-4" />
                   ) : (
                     <ChevronDown className="h-4 w-4" />
@@ -98,7 +99,7 @@ export function Experience() {
                 ))}
               </div>
               
-              {expandedCard === experience.role && (
+              {expandedCard === experience.id && (
                 <div className="space-y-4 pt-4">
                   <Separator />
                   <div className="space-y-2">
