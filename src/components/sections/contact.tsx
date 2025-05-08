@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -33,6 +34,7 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>
 
 export function Contact() {
+  const [isSubmitting, setIsSubmitting] = React.useState(false)
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -43,9 +45,33 @@ export function Contact() {
     },
   })
 
-  function onSubmit(values: FormValues) {
-    // TODO: Implement form submission
-    console.log(values)
+  async function onSubmit(values: FormValues) {
+    setIsSubmitting(true)
+    
+    try {
+      // You would typically send this to an API endpoint
+      // Replace with your actual API endpoint
+      // const response = await fetch('/api/contact', {
+      //   method: 'POST',
+      //   body: JSON.stringify(values),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //   },
+      // });
+      
+      // Simulating API call with timeout
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // if (!response.ok) throw new Error('Failed to send message');
+      
+      toast.success("Message sent successfully!");
+      form.reset();
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again later.");
+    } finally {
+      setIsSubmitting(false);
+    }
   }
 
   return (
@@ -118,7 +144,9 @@ export function Contact() {
                     </FormItem>
                   )}
                 />
-                <Button type="submit">Send Message</Button>
+                <Button type="submit" disabled={isSubmitting}>
+                  {isSubmitting ? "Sending..." : "Send Message"}
+                </Button>
               </form>
             </Form>
           </CardContent>
