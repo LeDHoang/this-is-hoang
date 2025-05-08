@@ -99,7 +99,8 @@ const projects: Project[] = [
       "Achieved 94.5% accuracy with AdaBoost Regression",
       "Identified key climate features impacting power consumption patterns"
     ],
-    link: "https://github.com/raynardflores/powerhouse-squad-project"
+    link: "https://github.com/raynardflores/powerhouse-squad-project",
+    presentationLink: "https://docs.google.com/presentation/d/1y_sWiRhllMJiLuo207LJPSRLDRtRdl9Ik0Hi7H3-k4Q/edit?usp=sharing"
   },
   {
     title: "Vanguard A/B Testing for New User Interface",
@@ -190,16 +191,16 @@ export function Projects() {
         </ScrollArea>
         {categories.map((category) => (
           <TabsContent key={category} value={category} className="mt-6">
-            <ScrollArea className="w-full">
-              <div className="flex space-x-4 pb-4 snap-x snap-mandatory">
+            <div className="w-full overflow-auto pb-4">
+              <div className="flex space-x-6 p-2">
                 {projects
                   .filter((project) => project.category === category)
                   .map((project) => (
                     <Card 
                       key={project.title} 
                       className={cn(
-                        "w-[350px] flex-shrink-0 snap-start transition-all duration-300",
-                        expandedCard === project.title && "w-[600px]"
+                        "w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
+                        expandedCard === project.title && "w-[600px] min-w-[600px]"
                       )}
                     >
                       <CardHeader>
@@ -292,8 +293,7 @@ export function Projects() {
                     </Card>
                   ))}
               </div>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+            </div>
           </TabsContent>
         ))}
       </Tabs>
