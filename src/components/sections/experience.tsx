@@ -12,7 +12,7 @@ import { Separator } from "@/components/ui/separator"
 const experiences = [
   {
     id: "verifone",
-    role: "Machine Learning and AI Internship",
+    role: "Machine Learning Internship",
     company: "Verifone",
     period: "Aug 2024 - May 2025",
     location: "FL, United States",
@@ -31,8 +31,28 @@ const experiences = [
     ]
   },
   {
+    id: "eufinity",
+    role: "Web Design Internship",
+    company: "Eufinity",
+    period: "Apr 2023 - Aug 2023",
+    location: "FL, United States",
+    description: "Developed a mental support platform website for college students, focusing on secure consultation and effective matching algorithms.",
+    responsibilities: [
+      "Established a mental support platform website from scratch using Javascript, CSS, and HTML5",
+      "Constructed and implemented a matching feature utilizing ranking algorithms to pair coaches and students",
+      "Improved web code quality, dynamic, and performance for different devices",
+      "Ensured platform security and confidentiality for mental health consultations"
+    ],
+    techStack: ["JavaScript", "CSS", "HTML5"],
+    achievements: [
+      "Created a secure and confidential platform for college mental health consultation",
+      "Successfully implemented an algorithm-based matching system for coaches and students",
+      "Optimized website performance across multiple device types"
+    ]
+  },
+  {
     id: "its",
-    role: "Machine Learning and AI Internship",
+    role: "Machine Learning Internship",
     company: "Institute of Technology and Science",
     period: "May 2022 - July 2022",
     location: "Ha Noi, Vietnam",
