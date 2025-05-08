@@ -28,6 +28,26 @@ const categories = ["Machine Learning", "Data Science", "Web Design", "Photograp
 
 const projects: Project[] = [
   {
+    title: "HER - Local AI Voice Assistant",
+    date: "Current Project",
+    category: "Machine Learning",
+    summary: "Developing an emotionally intelligent conversational AI assistant inspired by the movie 'Her', with dual processing options: fully local execution for maximum privacy or integration with ChatGPT Realtime API for enhanced performance and lower latency. Features natural emotion detection and expression in conversations.",
+    techStack: ["Python", "TensorFlow", "PyTorch", "OpenAI Realtime API", "Whisper", "XTTS", "Emotion Recognition", "WebRTC"],
+    logs: [
+      { date: "2024-09-15", note: "Established project architecture with dual processing paths (local and API-based)" },
+      { date: "2024-10-01", note: "Implemented local speech-to-text using Whisper with emotion detection capabilities" },
+      { date: "2024-10-20", note: "Integrated OpenAI Realtime API for enhanced conversation fluidity and response quality" },
+      { date: "2024-11-05", note: "Developed emotional text-to-speech synthesis with voice modulation based on context" },
+      { date: "2024-11-25", note: "Currently optimizing latency and implementing memory for personalized emotional responses" }
+    ],
+    achievements: [
+      "Created hybrid AI system with <0.5 second response time using API mode",
+      "Implemented emotion recognition and appropriate vocal responses in conversations",
+      "Designed memory system that adapts conversation style based on emotional history"
+    ],
+    link: "https://github.com/LeDHoang/HER--Local-AI-Voice-Assitant"
+  },
+  {
     title: "RAG-based PDF Query System for Healthcare Insurance",
     date: "Dec 2024",
     category: "Machine Learning",
@@ -123,6 +143,27 @@ const projects: Project[] = [
     ],
     link: "https://github.com/LeDHoang/SportBetting-DataAnalytics",
     presentationLink: "https://docs.google.com/presentation/d/1E6k73X7N5hKuSZwvaJ0WUkMo4LVOeAdtlrb1h8VqSOw/edit?usp=sharing"
+  },
+  {
+    title: "Harry Potter Universe Character Analysis",
+    date: "Apr 2024",
+    category: "Data Science",
+    summary: "Conducted comprehensive data analysis on Harry Potter universe characters, combining Kaggle datasets with Potter:DB API data to explore relationships between character attributes, loyalty, and demographics.",
+    techStack: ["Python", "Pandas", "NumPy", "Jupyter Notebook", "SQL", "Matplotlib", "Seaborn", "API Integration"],
+    logs: [
+      { date: "2024-02-15", note: "Designed and implemented SQL database schema for Harry Potter character data" },
+      { date: "2024-03-01", note: "Integrated data from Kaggle dataset and Potter:DB API for comprehensive analysis" },
+      { date: "2024-03-15", note: "Performed exploratory data analysis on character attributes and relationships" },
+      { date: "2024-03-30", note: "Created character categorization model based on loyalty and moral alignment" },
+      { date: "2024-04-10", note: "Generated visualizations showcasing demographic patterns and character profiles" }
+    ],
+    achievements: [
+      "Developed SQL database schema to efficiently store and query character information",
+      "Created categorization system for moral alignment based on character loyalties",
+      "Discovered meaningful patterns in character attributes across different Hogwarts houses"
+    ],
+    link: "https://github.com/LeDHoang/HPWorld-DataAnalysis",
+    presentationLink: "https://docs.google.com/presentation/d/19Ki-JT1panTx1nDKzkvIWd_HcwEqQLb6E1cy636BSvE/edit?usp=sharing"
   }
 ]
 
