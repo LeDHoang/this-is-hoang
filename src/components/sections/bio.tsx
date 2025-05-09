@@ -11,6 +11,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { TextShimmerWave } from "@/components/ui/text-shimmer-wave"
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
@@ -101,6 +102,11 @@ export function Bio() {
             </a>
             <ModeToggle />
           </div>
+          <TextShimmerWave
+            className="[--base-color:#000000] [--base-gradient-color:#ffffff] dark:[--base-color:#ffffff] dark:[--base-gradient-color:#000000]"
+          >
+            Creating perfect vibe....
+          </TextShimmerWave>
         </div>
       </div>
     </section>
