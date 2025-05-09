@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
+import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
 
 interface Project {
   title: string;
@@ -191,109 +192,172 @@ export function Projects() {
         </ScrollArea>
         {categories.map((category) => (
           <TabsContent key={category} value={category} className="mt-6">
-            <div className="w-full overflow-auto pb-4">
-              <div className="flex space-x-6 p-2">
-                {projects
-                  .filter((project) => project.category === category)
-                  .map((project) => (
-                    <Card 
-                      key={project.title} 
-                      className={cn(
-                        "w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
-                        expandedCard === project.title && "w-[600px] min-w-[600px]"
-                      )}
-                    >
-                      <CardHeader>
-                        <div className="flex justify-between items-start">
-                          <div>
-                            <CardTitle>{project.title}</CardTitle>
-                            <CardDescription>{project.date}</CardDescription>
+            {category === "Photography" ? (
+              <InteractiveBentoGallery
+                mediaItems={[
+                  {
+                    id: 1,
+                    type: "image",
+                    title: "Anurag Mishra",
+                    desc: "Driven, innovative, visionary",
+                    url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+                    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2",
+                  },
+                  {
+                    id: 2,
+                    type: "video",
+                    title: "Dog Puppy",
+                    desc: "Adorable loyal companion.",
+                    url: "https://cdn.pixabay.com/video/2024/07/24/222837_large.mp4",
+                    span: "md:col-span-2 md:row-span-2 col-span-1 sm:col-span-2 sm:row-span-2",
+                  },
+                  {
+                    id: 3,
+                    type: "image",
+                    title: "Forest Path",
+                    desc: "Mystical forest trail",
+                    url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e",
+                    span: "md:col-span-1 md:row-span-3 sm:col-span-2 sm:row-span-2 ",
+                  },
+                  {
+                    id: 4,
+                    type: "image",
+                    title: "Falling Leaves",
+                    desc: "Autumn scenery",
+                    url: "https://images.unsplash.com/photo-1506744038136-46273834b3fb",
+                    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2 ",
+                  },
+                  {
+                    id: 5,
+                    type: "video",
+                    title: "Bird Parrot",
+                    desc: "Vibrant feathered charm",
+                    url: "https://cdn.pixabay.com/video/2020/07/30/46026-447087782_large.mp4",
+                    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2 ",
+                  },
+                  {
+                    id: 6,
+                    type: "image",
+                    title: "Beach Paradise",
+                    desc: "Sunny tropical beach",
+                    url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+                    span: "md:col-span-2 md:row-span-2 sm:col-span-1 sm:row-span-2 ",
+                  },
+                  {
+                    id: 7,
+                    type: "video",
+                    title: "Shiva Temple",
+                    desc: "Peaceful Shiva sanctuary.",
+                    url: "https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4",
+                    span: "md:col-span-1 md:row-span-3 sm:col-span-1 sm:row-span-2 ",
+                  },
+                ]}
+                title="Gallery Shots Collection"
+                description="Drag and explore our curated collection of shots"
+              />
+            ) : (
+              <div className="w-full overflow-auto pb-4">
+                <div className="flex space-x-6 p-2">
+                  {projects
+                    .filter((project) => project.category === category)
+                    .map((project) => (
+                      <Card 
+                        key={project.title} 
+                        className={cn(
+                          "w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
+                          expandedCard === project.title && "w-[600px] min-w-[600px]"
+                        )}
+                      >
+                        <CardHeader>
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <CardTitle>{project.title}</CardTitle>
+                              <CardDescription>{project.date}</CardDescription>
+                            </div>
+                            <Button
+                              variant="ghost"
+                              size="icon"
+                              onClick={() => setExpandedCard(expandedCard === project.title ? null : project.title)}
+                              className="h-8 w-8"
+                            >
+                              {expandedCard === project.title ? (
+                                <ChevronUp className="h-4 w-4" />
+                              ) : (
+                                <ChevronDown className="h-4 w-4" />
+                              )}
+                            </Button>
                           </div>
-                          <Button
-                            variant="ghost"
-                            size="icon"
-                            onClick={() => setExpandedCard(expandedCard === project.title ? null : project.title)}
-                            className="h-8 w-8"
-                          >
-                            {expandedCard === project.title ? (
-                              <ChevronUp className="h-4 w-4" />
-                            ) : (
-                              <ChevronDown className="h-4 w-4" />
-                            )}
-                          </Button>
-                        </div>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="space-y-4">
-                          <p className="text-sm text-muted-foreground">{project.summary}</p>
-                          <div className="flex flex-wrap gap-2">
-                            {project.techStack.map((tech) => (
-                              <Badge key={tech} variant="secondary">
-                                {tech}
-                              </Badge>
-                            ))}
-                          </div>
-                          
-                          {expandedCard === project.title && (
-                            <div className="space-y-4 pt-4">
-                              <Separator />
-                              <div className="space-y-2">
-                                <h4 className="font-semibold">Progress Logs</h4>
+                        </CardHeader>
+                        <CardContent>
+                          <div className="space-y-4">
+                            <p className="text-sm text-muted-foreground">{project.summary}</p>
+                            <div className="flex flex-wrap gap-2">
+                              {project.techStack.map((tech) => (
+                                <Badge key={tech} variant="secondary">
+                                  {tech}
+                                </Badge>
+                              ))}
+                            </div>
+                            {expandedCard === project.title && (
+                              <div className="space-y-4 pt-4">
+                                <Separator />
                                 <div className="space-y-2">
-                                  {project.logs.map((log) => (
-                                    <div key={log.date} className="text-sm">
-                                      <span className="font-medium">{log.date}:</span> {log.note}
-                                    </div>
-                                  ))}
+                                  <h4 className="font-semibold">Progress Logs</h4>
+                                  <div className="space-y-2">
+                                    {project.logs.map((log) => (
+                                      <div key={log.date} className="text-sm">
+                                        <span className="font-medium">{log.date}:</span> {log.note}
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+                                <div className="space-y-2">
+                                  <h4 className="font-semibold">Achievements</h4>
+                                  <ul className="list-disc list-inside space-y-1 text-sm">
+                                    {project.achievements.map((achievement) => (
+                                      <li key={achievement}>{achievement}</li>
+                                    ))}
+                                  </ul>
                                 </div>
                               </div>
-                              <div className="space-y-2">
-                                <h4 className="font-semibold">Achievements</h4>
-                                <ul className="list-disc list-inside space-y-1 text-sm">
-                                  {project.achievements.map((achievement) => (
-                                    <li key={achievement}>{achievement}</li>
-                                  ))}
-                                </ul>
-                              </div>
+                            )}
+                            <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
+                              <a
+                                href={project.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
+                              >
+                                <span>View Project</span> <ExternalLink className="ml-1 h-4 w-4" />
+                              </a>
+                              {project.presentationLink && (
+                                <a
+                                  href={project.presentationLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
+                                >
+                                  <span>Presentation</span> <ExternalLink className="ml-1 h-4 w-4" />
+                                </a>
+                              )}
+                              {project.tableauLink && (
+                                <a
+                                  href={project.tableauLink}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
+                                >
+                                  <span>Tableau Story</span> <ExternalLink className="ml-1 h-4 w-4" />
+                                </a>
+                              )}
                             </div>
-                          )}
-                          
-                          <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
-                            <a
-                              href={project.link}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                            >
-                              <span>View Project</span> <ExternalLink className="ml-1 h-4 w-4" />
-                            </a>
-                            {project.presentationLink && (
-                              <a
-                                href={project.presentationLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                              >
-                                <span>Presentation</span> <ExternalLink className="ml-1 h-4 w-4" />
-                              </a>
-                            )}
-                            {project.tableauLink && (
-                              <a
-                                href={project.tableauLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                              >
-                                <span>Tableau Story</span> <ExternalLink className="ml-1 h-4 w-4" />
-                              </a>
-                            )}
                           </div>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                        </CardContent>
+                      </Card>
+                    ))}
+                </div>
               </div>
-            </div>
+            )}
           </TabsContent>
         ))}
       </Tabs>
