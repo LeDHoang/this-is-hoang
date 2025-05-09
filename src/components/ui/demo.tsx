@@ -9,4 +9,4 @@ export function StarBorderDemo() {
       </StarBorder>
     </div>
   )
-} 
+}
