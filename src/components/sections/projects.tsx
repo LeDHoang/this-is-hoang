@@ -328,33 +328,24 @@ export function Projects() {
                               </div>
                             )}
                             <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
-                              <a
-                                href={project.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                              >
-                                <span>View Project</span> <ExternalLink className="ml-1 h-4 w-4" />
-                              </a>
-                              {project.presentationLink && (
-                                <a
-                                  href={project.presentationLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                                >
-                                  <span>Presentation</span> <ExternalLink className="ml-1 h-4 w-4" />
+                              <Button asChild variant="outline" className="px-2">
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                  View Project <ExternalLink className="ml-1 h-4 w-4" />
                                 </a>
+                              </Button>
+                              {project.presentationLink && (
+                                <Button asChild variant="outline" className="px-2">
+                                  <a href={project.presentationLink} target="_blank" rel="noopener noreferrer">
+                                    Presentation <ExternalLink className="ml-1 h-4 w-4" />
+                                  </a>
+                                </Button>
                               )}
                               {project.tableauLink && (
-                                <a
-                                  href={project.tableauLink}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center justify-center text-sm text-primary hover:underline px-2"
-                                >
-                                  <span>Tableau Story</span> <ExternalLink className="ml-1 h-4 w-4" />
-                                </a>
+                                <Button asChild variant="outline" className="px-2">
+                                  <a href={project.tableauLink} target="_blank" rel="noopener noreferrer">
+                                    Tableau Story <ExternalLink className="ml-1 h-4 w-4" />
+                                  </a>
+                                </Button>
                               )}
                             </div>
                           </div>
