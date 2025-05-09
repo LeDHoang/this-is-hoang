@@ -103,7 +103,7 @@ export function Bio() {
             <ModeToggle />
           </div>
           <TextShimmerWave
-            className="[--base-color:#000000] [--base-gradient-color:#ffffff] dark:[--base-color:#ffffff] dark:[--base-gradient-color:#000000]"
+            className="[--base-color:#000000] [--base-gradient-color:#ffffff] dark:[--base-color:#ffffff] dark:[--base-gradient-color:#000000] text-secondary"
           >
             Creating perfect vibe....
           </TextShimmerWave>
