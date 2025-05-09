@@ -7,5 +7,20 @@ export function ThemeProvider({
   children,
   ...props
 }: React.ComponentProps<typeof NextThemesProvider>) {
-  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
+  React.useEffect(() => {
+    // If theme is custom, add the custom class to the HTML element
+    const theme = localStorage.getItem("hoang-theme")
+    if (theme === '"custom"') {
+      document.documentElement.classList.add("custom")
+    }
+  }, [])
+
+  return (
+    <NextThemesProvider
+      themes={['light', 'dark', 'system', 'custom']}
+      {...props}
+    >
+      {children}
+    </NextThemesProvider>
+  )
 }

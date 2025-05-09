@@ -13,7 +13,23 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 export function ModeToggle() {
-  const { setTheme } = useTheme()
+  const { setTheme, theme } = useTheme()
+
+  const handleThemeChange = (newTheme: string) => {
+    if (newTheme === "custom") {
+      document.documentElement.classList.add("custom")
+      // If it was in dark mode before, keep it dark
+      if (document.documentElement.classList.contains("dark")) {
+        setTheme("custom")
+      } else {
+        setTheme("custom")
+        document.documentElement.classList.remove("dark")
+      }
+    } else {
+      document.documentElement.classList.remove("custom")
+      setTheme(newTheme)
+    }
+  }
 
   return (
     <DropdownMenu>
@@ -25,14 +41,17 @@ export function ModeToggle() {
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="z-50 bg-background">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => handleThemeChange("light")}>
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => handleThemeChange("dark")}>
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => handleThemeChange("system")}>
           System
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => handleThemeChange("custom")}>
+          Custom
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

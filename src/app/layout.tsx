@@ -24,6 +24,8 @@ export default function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          enableColorScheme
+          storageKey="hoang-theme"
         >
           {children}
           <Toaster position="top-right" />
