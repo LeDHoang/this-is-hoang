@@ -52,7 +52,7 @@ const skillGroups = [
 
 export function Skills() {
   return (
-    <section className="space-y-6">
+    <section id="skills" className="space-y-6">
       <h2 className="text-3xl font-bold">Skills</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {skillGroups.map((group) => (

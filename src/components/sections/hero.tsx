@@ -10,7 +10,7 @@ export function Hero() {
   const particleColor = theme === "dark" ? "#ffffff" : "#000000"
 
   return (
-    <section className="w-full mb-8">
+    <section id="home" className="w-full mb-8">
       <div className="w-full">
         <div className="w-1/2 md:w-3/4 mx-auto h-64 sm:h-96">
           <TextParticle

@@ -61,7 +61,7 @@ export function ModeToggle() {
 
 export function Bio() {
   return (
-    <section className="flex flex-col items-center space-y-6">
+    <section id="bio" className="flex flex-col items-center space-y-6">
       <div className="flex items-start gap-8 max-w-3xl">
         <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0">
           <Image

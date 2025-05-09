@@ -75,7 +75,7 @@ export function Experience() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
 
   return (
-    <section className="space-y-6">
+    <section id="experience" className="space-y-6">
       <h2 className="text-3xl font-bold">Experience</h2>
       <div className="space-y-8">
         {experiences.map((experience) => (

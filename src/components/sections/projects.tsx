@@ -174,7 +174,7 @@ export function Projects() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
 
   return (
-    <section className="space-y-6">
+    <section id="projects" className="space-y-6">
       <h2 className="text-3xl font-bold">Projects</h2>
       <Tabs defaultValue={categories[0]} className="w-full">
         <ScrollArea className="w-full whitespace-nowrap">
