@@ -28,7 +28,7 @@ const categories = ["Machine Learning", "Data Science", "Web Design", "Photograp
 
 const projects: Project[] = [
   {
-    title: "HER - Local AI Voice Assistant",
+    title: "HER - Local Emotional AI Voice Assistant",
     date: "Current Project",
     category: "Machine Learning",
     summary: "Developing an emotionally intelligent conversational AI assistant inspired by the movie 'Her', with dual processing options: fully local execution for maximum privacy or integration with ChatGPT Realtime API for enhanced performance and lower latency. Features natural emotion detection and expression in conversations.",

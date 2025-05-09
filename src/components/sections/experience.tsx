@@ -89,9 +89,9 @@ export function Experience() {
             <CardHeader>
               <div className="flex justify-between items-start">
                 <div>
-                  <CardTitle>{experience.role}</CardTitle>
+                  <CardTitle>{experience.company}</CardTitle>
                   <CardDescription>
-                    {experience.company} • {experience.period}
+                    {experience.role} • {experience.period}
                   </CardDescription>
                   <CardDescription>{experience.location}</CardDescription>
                 </div>
