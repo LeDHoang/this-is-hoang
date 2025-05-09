@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import InteractiveBentoGallery from "@/components/ui/interactive-bento-gallery"
 import { ThreeDPhotoCarousel } from "@/components/ui/3d-carousel"
+import { BrandGithub } from "@mynaui/icons-react"
 
 interface Project {
   title: string;
@@ -279,6 +280,11 @@ export function Projects() {
                             <div>
                               <CardTitle>{project.title}</CardTitle>
                               <CardDescription>{project.date}</CardDescription>
+                              <Button asChild variant="outline" size="icon" aria-label="View Project" className="mt-1">
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                  <BrandGithub className="h-4 w-4" />
+                                </a>
+                              </Button>
                             </div>
                             <Button
                               variant="ghost"
