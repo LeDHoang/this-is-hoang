@@ -199,7 +199,17 @@ export function ExpandableChatDemo() {
                     {message.type === "image" ? (
                     <img src={message.content} alt={message.fileName || "image"} className="max-w-xs rounded-lg" />
                   ) : message.type === "audio" ? (
-                    <audio controls src={message.content} className="max-w-xs" />
+                    <audio
+                      controls
+                      src={message.content}
+                      className={
+                        "max-w-xs bg-transparent border-0 text-current "+
+                        "[&::-webkit-media-controls-panel]:bg-transparent "+
+                        "[&::-webkit-media-controls-panel]:border-0 "+
+                        "[&::-webkit-media-controls-play-button]:bg-transparent "+
+                        "[&::-webkit-media-controls-play-button]:text-current"
+                      }
+                    />
                   ) : (
                     message.content
                   )}
