@@ -186,7 +186,7 @@ export function Projects() {
                               <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
                                 <Button asChild variant="outline" className="px-2">
                                   <Link href={`/projects/${slug}/changelog`} className="inline-flex items-center">
-                                    View Changelog <ExternalLink className="ml-1 h-4 w-4" />
+                                    Changelog <ExternalLink className="ml-1 h-4 w-4" />
                                   </Link>
                                 </Button>
                                 {project.presentationLink && (

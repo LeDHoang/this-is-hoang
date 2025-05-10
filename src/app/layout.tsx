@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
+import { Footer } from "@/components/ui/footer";
+import { Eye } from "@mynaui/icons-react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +31,25 @@ export default function RootLayout({
         >
           {children}
           <Toaster position="top-right" />
+          <Footer
+            logo={<Eye className="h-10 w-10" />}
+            brandName="Watcher Corp"
+            socialLinks={[]}
+            mainLinks={[
+              { href: "/", label: "Home" },
+              { href: "/about", label: "About" },
+              { href: "/blog", label: "Blog" },
+              { href: "/contact", label: "Contact" },
+            ]}
+            legalLinks={[
+              { href: "/privacy", label: "Privacy" },
+              { href: "/terms", label: "Terms" },
+            ]}
+            copyright={{
+              text: `© ${new Date().getFullYear()} Watcher Corp`,
+              license: "All rights reserved - We are always watching",
+            }}
+          />
         </ThemeProvider>
       </body>
     </html>
