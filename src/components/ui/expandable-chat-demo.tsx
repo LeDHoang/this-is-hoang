@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, FormEvent } from "react"
+import { useState, FormEvent, useRef, ChangeEvent } from "react"
 import { Send, Bot, Paperclip, Mic, CornerDownLeft } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -17,8 +17,17 @@ import {
 } from "@/components/ui/expandable-chat"
 import { ChatMessageList } from "@/components/ui/chat-message-list"
 
+// Define Message type for chat messages
+interface Message {
+  id: number
+  content: string
+  sender: 'user' | 'ai'
+  type?: 'text' | 'image' | 'audio'
+  fileName?: string
+}
+
 export function ExpandableChatDemo() {
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useState<Message[]>([
     {
       id: 1,
       content: "Hello! How can I help you today?",
@@ -38,6 +47,12 @@ export function ExpandableChatDemo() {
 
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  // Refs and state for file and audio handling
+  const fileInputRef = useRef<HTMLInputElement>(null)
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null)
+  const audioChunksRef = useRef<Blob[]>([])
+  const [isRecording, setIsRecording] = useState(false)
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -67,12 +82,46 @@ export function ExpandableChatDemo() {
     }, 1000)
   }
 
+  const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const url = URL.createObjectURL(file)
+    setMessages(prev => [
+      ...prev,
+      { id: prev.length + 1, content: url, sender: "user", type: "image", fileName: file.name }
+    ])
+    e.target.value = ""
+  }
+
   const handleAttachFile = () => {
-    //
+    fileInputRef.current?.click()
   }
 
   const handleMicrophoneClick = () => {
-    //
+    if (!isRecording) {
+      navigator.mediaDevices.getUserMedia({ audio: true }).then(stream => {
+        const mediaRecorder = new MediaRecorder(stream)
+        mediaRecorderRef.current = mediaRecorder
+        audioChunksRef.current = []
+        mediaRecorder.ondataavailable = event => {
+          audioChunksRef.current.push(event.data)
+        }
+        mediaRecorder.onstop = () => {
+          const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" })
+          const audioUrl = URL.createObjectURL(audioBlob)
+          setMessages(prev => [
+            ...prev,
+            { id: prev.length + 1, content: audioUrl, sender: "user", type: "audio" }
+          ])
+          stream.getTracks().forEach(track => track.stop())
+        }
+        mediaRecorder.start()
+        setIsRecording(true)
+      })
+    } else {
+      mediaRecorderRef.current?.stop()
+      setIsRecording(false)
+    }
   }
 
   return (
@@ -108,7 +157,13 @@ export function ExpandableChatDemo() {
                 <ChatBubbleMessage
                   variant={message.sender === "user" ? "sent" : "received"}
                 >
-                  {message.content}
+                  {message.type === "image" ? (
+                    <img src={message.content} alt={message.fileName || "image"} className="max-w-xs rounded-lg" />
+                  ) : message.type === "audio" ? (
+                    <audio controls src={message.content} className="max-w-xs" />
+                  ) : (
+                    message.content
+                  )}
                 </ChatBubbleMessage>
               </ChatBubble>
             ))}
@@ -165,6 +220,13 @@ export function ExpandableChatDemo() {
           </form>
         </ExpandableChatFooter>
       </ExpandableChat>
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+      />
     </>
   )
 } 
