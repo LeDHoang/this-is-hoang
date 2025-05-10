@@ -27,26 +27,21 @@ interface Message {
 }
 
 export function ExpandableChatDemo() {
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: 1,
-      content: "Hello! How can I help you today?",
-      sender: "ai",
-    },
-    {
-      id: 2,
-      content: "I have a question about the component library.",
-      sender: "user",
-    },
-    {
-      id: 3,
-      content: "Sure! I'd be happy to help. What would you like to know?",
-      sender: "ai",
-    },
-  ])
-
+  const initialMessages = [
+    { id: 1, type: "gif", src: "/footage/photo/giphy.gif", sender: "ai" },
+    { id: 2, content: "Hello there, I might not be alive but I am <b><u style=\"text-decoration: underline\">mini-Hoang</u></b>, and I can answer any question you have about him.", sender: "ai" },
+    { id: 3, content: "I have a question about Hoang as a person.", sender: "user" },
+    { id: 4, content: "Sure! I'd be happy to help. What would you like to know?", sender: "ai" },
+  ]
+  const [messages, setMessages] = useState(initialMessages)
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
+
+  const handleReset = () => {
+    setMessages(initialMessages)
+    setInput("")
+    setIsLoading(false)
+  }
 
   // Refs and state for file and audio handling
   const fileInputRef = useRef<HTMLInputElement>(null)
@@ -131,11 +126,14 @@ export function ExpandableChatDemo() {
         position="bottom-right"
         icon={<Bot className="h-6 w-6" />}
       >
-        <ExpandableChatHeader className="flex-col text-center justify-center">
-          <h1 className="text-xl font-semibold">Chat with AI ✨</h1>
-          <p className="text-sm text-muted-foreground">
-            Ask me anything about the components
-          </p>
+        <ExpandableChatHeader className="flex items-center justify-between w-full px-4 py-2">
+          <div className="flex flex-col">
+            <h1 className="text-xl font-semibold">Chat with me ✨</h1>
+            <p className="text-sm text-muted-foreground">A.M.A - Ask Me Anything</p>
+          </div>
+          <Button variant="outline" size="sm" onClick={handleReset}>
+            Reset Chat
+          </Button>
         </ExpandableChatHeader>
 
         <ExpandableChatBody>
@@ -150,21 +148,37 @@ export function ExpandableChatDemo() {
                   src={
                     message.sender === "user"
                       ? "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=64&h=64&q=80&crop=faces&fit=crop"
-                      : "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
+                      : "/profile.jpg"
                   }
                   fallback={message.sender === "user" ? "US" : "AI"}
                 />
-                <ChatBubbleMessage
-                  variant={message.sender === "user" ? "sent" : "received"}
-                >
-                  {message.type === "image" ? (
+                {message.type === "gif" ? (
+                  <ChatBubbleMessage variant="received" className="p-1 bg-transparent">
+                    <img
+                      src={message.src}
+                      alt="AI GIF"
+                      className="max-w-[200px] h-auto rounded-lg"
+                    />
+                  </ChatBubbleMessage>
+                ) : message.content && message.content.includes('<b>') ? (
+                  <ChatBubbleMessage
+                    variant={message.sender === "user" ? "sent" : "received"}
+                  >
+                    <span dangerouslySetInnerHTML={{ __html: message.content }} />
+                  </ChatBubbleMessage>
+                ) : (
+                  <ChatBubbleMessage
+                    variant={message.sender === "user" ? "sent" : "received"}
+                  >
+                    {message.type === "image" ? (
                     <img src={message.content} alt={message.fileName || "image"} className="max-w-xs rounded-lg" />
                   ) : message.type === "audio" ? (
                     <audio controls src={message.content} className="max-w-xs" />
                   ) : (
                     message.content
                   )}
-                </ChatBubbleMessage>
+                  </ChatBubbleMessage>
+                )}
               </ChatBubble>
             ))}
 
@@ -172,7 +186,7 @@ export function ExpandableChatDemo() {
               <ChatBubble variant="received">
                 <ChatBubbleAvatar
                   className="h-8 w-8 shrink-0"
-                  src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=64&h=64&q=80&crop=faces&fit=crop"
+                  src="/profile.jpg"
                   fallback="AI"
                 />
                 <ChatBubbleMessage isLoading />
@@ -191,6 +205,12 @@ export function ExpandableChatDemo() {
               onChange={(e) => setInput(e.target.value)}
               placeholder="Type your message..."
               className="min-h-12 resize-none rounded-lg bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  handleSubmit(e);
+                }
+              }}
             />
             <div className="flex items-center p-3 pt-0 justify-between">
               <div className="flex">
