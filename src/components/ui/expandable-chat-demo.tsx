@@ -2,6 +2,7 @@
 
 import { useState, FormEvent, useRef, ChangeEvent } from "react"
 import { Send, Bot, Paperclip, Mic, CornerDownLeft } from "lucide-react"
+import { Square } from "@mynaui/icons-react"
 import { Button } from "@/components/ui/button"
 import {
   ChatBubble,
@@ -20,20 +21,21 @@ import { ChatMessageList } from "@/components/ui/chat-message-list"
 // Define Message type for chat messages
 interface Message {
   id: number
-  content: string
+  content?: string
   sender: 'user' | 'ai'
-  type?: 'text' | 'image' | 'audio'
+  type?: 'text' | 'image' | 'audio' | 'gif'
+  src?: string
   fileName?: string
 }
 
 export function ExpandableChatDemo() {
-  const initialMessages = [
+  const initialMessages: Message[] = [
     { id: 1, type: "gif", src: "/footage/photo/giphy.gif", sender: "ai" },
     { id: 2, content: "Hello there, I might not be alive but I am <b><u style=\"text-decoration: underline\">mini-Hoang</u></b>, and I can answer any question you have about him.", sender: "ai" },
     { id: 3, content: "I have a question about Hoang as a person.", sender: "user" },
     { id: 4, content: "Sure! I'd be happy to help. What would you like to know?", sender: "ai" },
   ]
-  const [messages, setMessages] = useState(initialMessages)
+  const [messages, setMessages] = useState<Message[]>(initialMessages)
   const [input, setInput] = useState("")
   const [isLoading, setIsLoading] = useState(false)
 
@@ -85,6 +87,18 @@ export function ExpandableChatDemo() {
       ...prev,
       { id: prev.length + 1, content: url, sender: "user", type: "image", fileName: file.name }
     ])
+    setIsLoading(true)
+    setTimeout(() => {
+      setMessages(prev => [
+        ...prev,
+        {
+          id: prev.length + 1,
+          content: "This is an AI response to your message.",
+          sender: "ai",
+        },
+      ])
+      setIsLoading(false)
+    }, 1000)
     e.target.value = ""
   }
 
@@ -109,6 +123,18 @@ export function ExpandableChatDemo() {
             { id: prev.length + 1, content: audioUrl, sender: "user", type: "audio" }
           ])
           stream.getTracks().forEach(track => track.stop())
+          setIsLoading(true)
+          setTimeout(() => {
+            setMessages(prev => [
+              ...prev,
+              {
+                id: prev.length + 1,
+                content: "This is an AI response to your message.",
+                sender: "ai",
+              },
+            ])
+            setIsLoading(false)
+          }, 1000)
         }
         mediaRecorder.start()
         setIsRecording(true)
@@ -229,7 +255,11 @@ export function ExpandableChatDemo() {
                   type="button"
                   onClick={handleMicrophoneClick}
                 >
-                  <Mic className="size-4" />
+                  {isRecording ? (
+                    <Square className="size-4 text-red-500 transition-all duration-500" fill="currentColor" />
+                  ) : (
+                    <Mic className="size-4 transition-all duration-500" />
+                  )}
                 </Button>
               </div>
               <Button type="submit" size="sm" className="ml-auto gap-1.5 bg-black text-white dark:bg-white dark:text-black">
