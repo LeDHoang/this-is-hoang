@@ -52,7 +52,7 @@ const ExpandableChat: React.FC<ExpandableChatProps> = ({
 
   return (
     <div
-      className={cn(`fixed ${chatConfig.positions[position]} z-50`, className)}
+      className={cn(`fixed ${chatConfig.positions[position]} z-[9999]`, className)}
       {...props}
     >
       <div
@@ -130,16 +130,19 @@ const ExpandableChatToggle: React.FC<ExpandableChatToggleProps> = ({
     variant="default"
     onClick={toggleChat}
     className={cn(
-      "w-14 h-14 rounded-full shadow-md flex items-center justify-center hover:shadow-lg hover:shadow-black/30 transition-all duration-300",
+      "w-14 h-14 rounded-full shadow-lg border-2 border-black dark:border-white flex items-center justify-center hover:shadow-xl transition-all duration-300 bg-white dark:bg-black text-black dark:text-white",
       className,
     )}
     {...props}
   >
-    {isOpen ? (
-      <X className="h-6 w-6" />
-    ) : (
-      icon || <MessageCircle className="h-6 w-6" />
-    )}
+    <div className="absolute inset-0 rounded-full pointer-events-none"></div>
+    <div className="relative z-10">
+      {isOpen ? (
+        <X className="h-6 w-6" />
+      ) : (
+        icon || <MessageCircle className="h-6 w-6" />
+      )}
+    </div>
   </Button>
 );
 

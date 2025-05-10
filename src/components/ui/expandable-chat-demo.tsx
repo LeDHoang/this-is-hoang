@@ -76,7 +76,7 @@ export function ExpandableChatDemo() {
   }
 
   return (
-    <div className="h-[600px] relative">
+    <>
       <ExpandableChat
         size="lg"
         position="bottom-right"
@@ -165,6 +165,6 @@ export function ExpandableChatDemo() {
           </form>
         </ExpandableChatFooter>
       </ExpandableChat>
-    </div>
+    </>
   )
 } 
