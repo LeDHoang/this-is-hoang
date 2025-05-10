@@ -24,7 +24,7 @@ export default function Page({ params }: { params: { slug: string } }) {
     .map((log) => ({
       title: log.date,
       content: (
-        <div className="text-sm text-neutral-800 dark:text-neutral-200 mb-4">
+        <div className="text-sm text-secondary-foreground mb-4">
           {log.note}
         </div>
       ),
