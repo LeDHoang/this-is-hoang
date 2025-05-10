@@ -6,6 +6,7 @@ import { Education } from "@/components/sections/education"
 import { Skills } from "@/components/sections/skills"
 import { Contact } from "@/components/sections/contact"
 import { BottomDock } from "@/components/sections/dock"
+import { ExpandableChatDemo } from "@/components/ui/expandable-chat-demo"
 
 export default function Home() {
   return (
@@ -22,6 +23,7 @@ export default function Home() {
         </div>
       </main>
       <BottomDock />
+      <ExpandableChatDemo />
     </>
   )
 }
