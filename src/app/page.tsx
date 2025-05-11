@@ -24,12 +24,9 @@ export default function Home() {
           <Bio />
           <WorldMap
             dots={[
-              { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: 34.0522, lng: -118.2437 } },
-              { start: { lat: 64.2008, lng: -149.4937 }, end: { lat: -15.7975, lng: -47.8919 } },
-              { start: { lat: -15.7975, lng: -47.8919 }, end: { lat: 38.7223, lng: -9.1393 } },
-              { start: { lat: 51.5074, lng: -0.1278 }, end: { lat: 28.6139, lng: 77.209 } },
-              { start: { lat: 28.6139, lng: 77.209 }, end: { lat: 43.1332, lng: 131.9113 } },
-              { start: { lat: 28.6139, lng: 77.209 }, end: { lat: -1.2921, lng: 36.8219 } },
+              { start: { lat: 18.6796, lng: 105.6818 }, end: { lat: 21.0278, lng: 105.8342 } },  // Vinh → Hanoi
+              { start: { lat: 21.0278, lng: 105.8342 }, end: { lat: 22.3193, lng: 114.1694 } },  // Hanoi → Hong Kong
+              { start: { lat: 22.3193, lng: 114.1694 }, end: { lat: 29.6516, lng: -82.3248 } },  // Hong Kong → Gainesville
             ]}
           />
           <Projects />

@@ -31,9 +31,10 @@ export function WorldMap({
     backgroundColor: theme === "dark" ? "black" : "white",
   });
 
+  const verticalOffset = 40; // adjust this value (+ down, - up) to fine-tune vertical placement
   const projectPoint = (lat: number, lng: number) => {
     const x = (lng + 180) * (800 / 360);
-    const y = (90 - lat) * (400 / 180);
+    const y = (90 - lat) * (400 / 180) + verticalOffset;
     return { x, y };
   };
 
