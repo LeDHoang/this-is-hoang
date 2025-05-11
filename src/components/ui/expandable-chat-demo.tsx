@@ -51,66 +51,77 @@ export function ExpandableChatDemo() {
   const audioChunksRef = useRef<Blob[]>([])
   const [isRecording, setIsRecording] = useState(false)
 
-  const handleSubmit = (e: FormEvent) => {
+  // Helper to POST formData and stream SSE replies into the AI message
+  async function sendFormData(formData: FormData, aiMessageId: number) {
+    const res = await fetch('/api/chat', { method: 'POST', body: formData })
+    const reader = res.body!.getReader()
+    const decoder = new TextDecoder()
+    let buffer = ''
+    while (true) {
+      const { value, done } = await reader.read()
+      if (done) break
+      buffer += decoder.decode(value, { stream: true })
+      const parts = buffer.split('\n\n')
+      buffer = parts.pop() || ''
+      for (const part of parts) {
+        if (part.trim().startsWith('data:')) {
+          const jsonStr = part.replace(/^data:\s*/, '')
+          const msg = JSON.parse(jsonStr)
+          if (msg.done) {
+            setIsLoading(false)
+            return
+          }
+          setMessages(prev =>
+            prev.map(m =>
+              m.id === aiMessageId
+                ? { ...m, content: (m.content || '') + msg.text }
+                : m
+            )
+          )
+        }
+      }
+    }
+    setIsLoading(false)
+  }
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     if (!input.trim()) return
 
     // Add user message
     const userMessage: Message = { id: messages.length + 1, content: input, sender: 'user' }
-    setMessages((prev) => [...prev, userMessage])
+    setMessages(prev => [...prev, userMessage])
     setInput('')
     setIsLoading(true)
 
-    // Add empty AI message placeholder
+    // Add empty AI placeholder
     const aiMessage: Message = { id: userMessage.id + 1, content: '', sender: 'ai' }
-    setMessages((prev) => [...prev, aiMessage])
+    setMessages(prev => [...prev, aiMessage])
 
-    // Stream AI response via EventSource
-    const queryParam = encodeURIComponent(input)
-    const eventSource = new EventSource(`/api/chat?query=${queryParam}`)
-    eventSource.onerror = () => {
-      setIsLoading(false)
-      console.error('EventSource failed')
-      eventSource.close()
-    }
-    eventSource.onmessage = (e) => {
-      const msg = JSON.parse(e.data)
-      if (msg.done) {
-        setIsLoading(false)
-        eventSource.close()
-        return
-      }
-      const text = msg.text
-      // Append incoming text to the AI message
-      setMessages((prev) =>
-        prev.map((m) =>
-          m.id === aiMessage.id ? { ...m, content: (m.content || '') + text } : m
-        )
-      )
-    }
+    // POST text to /api/chat and stream response
+    const formData = new FormData()
+    formData.append('query', input)
+    await sendFormData(formData, aiMessage.id)
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    const url = URL.createObjectURL(file)
-    setMessages(prev => [
-      ...prev,
-      { id: prev.length + 1, content: url, sender: "user", type: "image", fileName: file.name }
-    ])
+
+    // Show user image
+    const userMessage: Message = { id: messages.length + 1, content: URL.createObjectURL(file), sender: 'user', type: 'image', fileName: file.name }
+    setMessages(prev => [...prev, userMessage])
     setIsLoading(true)
-    setTimeout(() => {
-      setMessages(prev => [
-        ...prev,
-        {
-          id: prev.length + 1,
-          content: "This is an AI response to your message.",
-          sender: "ai",
-        },
-      ])
-      setIsLoading(false)
-    }, 1000)
-    e.target.value = ""
+
+    // AI placeholder
+    const aiMessage: Message = { id: userMessage.id + 1, content: '', sender: 'ai' }
+    setMessages(prev => [...prev, aiMessage])
+
+    // POST image
+    const formData = new FormData()
+    formData.append('image', file)
+    sendFormData(formData, aiMessage.id)
+    e.target.value = ''
   }
 
   const handleAttachFile = () => {
@@ -126,26 +137,20 @@ export function ExpandableChatDemo() {
         mediaRecorder.ondataavailable = event => {
           audioChunksRef.current.push(event.data)
         }
-        mediaRecorder.onstop = () => {
-          const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" })
-          const audioUrl = URL.createObjectURL(audioBlob)
-          setMessages(prev => [
-            ...prev,
-            { id: prev.length + 1, content: audioUrl, sender: "user", type: "audio" }
-          ])
+        mediaRecorder.onstop = async () => {
+          const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' })
+          const userMessage: Message = { id: messages.length + 1, content: URL.createObjectURL(audioBlob), sender: 'user', type: 'audio' }
+          setMessages(prev => [...prev, userMessage])
           stream.getTracks().forEach(track => track.stop())
           setIsLoading(true)
-          setTimeout(() => {
-            setMessages(prev => [
-              ...prev,
-              {
-                id: prev.length + 1,
-                content: "This is an AI response to your message.",
-                sender: "ai",
-              },
-            ])
-            setIsLoading(false)
-          }, 1000)
+
+          const aiMessage: Message = { id: userMessage.id + 1, content: '', sender: 'ai' }
+          setMessages(prev => [...prev, aiMessage])
+
+          // POST audio
+          const formData = new FormData()
+          formData.append('audio', audioBlob, 'audio.webm')
+          sendFormData(formData, aiMessage.id)
         }
         mediaRecorder.start()
         setIsRecording(true)
