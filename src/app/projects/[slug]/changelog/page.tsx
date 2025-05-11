@@ -1,5 +1,7 @@
 import { Timeline } from "@/components/ui/timeline";
 import projects from "@/lib/projects";
+import { BottomDock } from "@/components/sections/dock";
+import { ExpandableChatDemo } from "@/components/ui/expandable-chat-demo";
 
 export default function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -31,12 +33,16 @@ export default function Page({ params }: { params: { slug: string } }) {
     }));
 
   return (
-    <div className="max-w-4xl mx-auto p-6">
-      <Timeline
-        data={data}
-        title={`${project.title} Changelog`}
-        description={project.summary}
-      />
-    </div>
+    <>
+      <div className="max-w-4xl mx-auto p-6">
+        <Timeline
+          data={data}
+          title={`${project.title} Changelog`}
+          description={project.summary}
+        />
+      </div>
+      <BottomDock />
+      <ExpandableChatDemo />
+    </>
   );
 } 

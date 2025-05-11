@@ -13,13 +13,13 @@ import {
 import { Dock, DockItem, DockIcon, DockLabel } from '@/components/ui/dock';
 
 const navItems = [
-  { title: 'Home', icon: <HomeIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#home' },
-  { title: 'Bio', icon: <UserIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#bio' },
-  { title: 'Projects', icon: <CodeIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#projects' },
-  { title: 'Experience', icon: <BriefcaseIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#experience' },
-  { title: 'Education', icon: <BookOpenIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#education' },
-  { title: 'Skills', icon: <StarIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#skills' },
-  { title: 'Contact', icon: <MailIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '#contact' },
+  { title: 'Home', icon: <HomeIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#home' },
+  { title: 'Bio', icon: <UserIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#bio' },
+  { title: 'Projects', icon: <CodeIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#projects' },
+  { title: 'Experience', icon: <BriefcaseIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#experience' },
+  { title: 'Education', icon: <BookOpenIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#education' },
+  { title: 'Skills', icon: <StarIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#skills' },
+  { title: 'Contact', icon: <MailIcon className='h-full w-full text-neutral-600 dark:text-neutral-300' />, href: '/#contact' },
 ];
 
 export function BottomDock() {
