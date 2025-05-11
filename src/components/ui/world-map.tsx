@@ -22,6 +22,7 @@ export function WorldMap({
   const map = new DottedMap({ height: 100, grid: "diagonal" });
 
   const { theme } = useTheme();
+  const dotColor = theme === "dark" ? "#FFFFFF" : "#000000";
 
   const svgMap = map.getSVG({
     radius: 0.22,
@@ -103,13 +104,13 @@ export function WorldMap({
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
                 r="2"
-                fill={lineColor}
+                fill={dotColor}
               />
               <circle
                 cx={projectPoint(dot.start.lat, dot.start.lng).x}
                 cy={projectPoint(dot.start.lat, dot.start.lng).y}
                 r="2"
-                fill={lineColor}
+                fill={dotColor}
                 opacity="0.5"
               >
                 <animate
@@ -135,13 +136,13 @@ export function WorldMap({
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
                 r="2"
-                fill={lineColor}
+                fill={dotColor}
               />
               <circle
                 cx={projectPoint(dot.end.lat, dot.end.lng).x}
                 cy={projectPoint(dot.end.lat, dot.end.lng).y}
                 r="2"
-                fill={lineColor}
+                fill={dotColor}
                 opacity="0.5"
               >
                 <animate
