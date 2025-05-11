@@ -55,28 +55,39 @@ export function ExpandableChatDemo() {
     e.preventDefault()
     if (!input.trim()) return
 
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: prev.length + 1,
-        content: input,
-        sender: "user",
-      },
-    ])
-    setInput("")
+    // Add user message
+    const userMessage: Message = { id: messages.length + 1, content: input, sender: 'user' }
+    setMessages((prev) => [...prev, userMessage])
+    setInput('')
     setIsLoading(true)
 
-    setTimeout(() => {
-      setMessages((prev) => [
-        ...prev,
-        {
-          id: prev.length + 1,
-          content: "This is an AI response to your message.",
-          sender: "ai",
-        },
-      ])
+    // Add empty AI message placeholder
+    const aiMessage: Message = { id: userMessage.id + 1, content: '', sender: 'ai' }
+    setMessages((prev) => [...prev, aiMessage])
+
+    // Stream AI response via EventSource
+    const queryParam = encodeURIComponent(input)
+    const eventSource = new EventSource(`/api/chat?query=${queryParam}`)
+    eventSource.onerror = () => {
       setIsLoading(false)
-    }, 1000)
+      console.error('EventSource failed')
+      eventSource.close()
+    }
+    eventSource.onmessage = (e) => {
+      const msg = JSON.parse(e.data)
+      if (msg.done) {
+        setIsLoading(false)
+        eventSource.close()
+        return
+      }
+      const text = msg.text
+      // Append incoming text to the AI message
+      setMessages((prev) =>
+        prev.map((m) =>
+          m.id === aiMessage.id ? { ...m, content: (m.content || '') + text } : m
+        )
+      )
+    }
   }
 
   const handleFileChange = (e: ChangeEvent<HTMLInputElement>) => {
