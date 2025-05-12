@@ -7,6 +7,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { MousePointerClick } from "lucide-react";
 import { toast } from "sonner";
+import { useTheme } from "next-themes";
 
 // Derive ButtonProps from the Button component
 type ButtonProps = React.ComponentProps<typeof Button>;
@@ -16,6 +17,7 @@ interface ParticleButtonProps extends ButtonProps {
 }
 
 function SuccessParticles({ buttonRef }: { buttonRef: React.RefObject<HTMLButtonElement | null> }) {
+  const { theme } = useTheme();
   const rect = buttonRef.current?.getBoundingClientRect();
   if (!rect) return null;
 
@@ -27,7 +29,7 @@ function SuccessParticles({ buttonRef }: { buttonRef: React.RefObject<HTMLButton
       {[...Array(6)].map((_, i) => (
         <motion.div
           key={i}
-          className="fixed w-1 h-1 bg-black dark:bg-white rounded-full"
+          className={cn("fixed w-1 h-1 rounded-full", theme === "dark" ? "bg-white" : "bg-black")}
           style={{ left: centerX, top: centerY }}
           initial={{ scale: 0, x: 0, y: 0 }}
           animate={{

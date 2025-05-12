@@ -152,7 +152,7 @@ export function MagicCardDemo() {
           <div className="flex justify-end mt-4">
             <ParticleButton
               successDuration={1000}
-              className="bg-foreground text-background hover:bg-foreground/90 dark:bg-background dark:text-foreground dark:hover:bg-background/90 border border-transparent"
+              className="bg-foreground text-background hover:bg-foreground/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 border border-transparent"
             >
               Buy me a coffee
             </ParticleButton>
