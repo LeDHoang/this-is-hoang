@@ -167,6 +167,10 @@ export function WorldMap({
           </g>
         ))}
       </svg>
+      <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-white dark:from-black to-transparent pointer-events-none" />
+      <p className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm dark:text-white text-black pointer-events-none">
+        Vietnam - Hong Kong - FL, United States
+      </p>
     </div>
   );
 }
