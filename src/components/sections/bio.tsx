@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave"
 import { StarBorder } from "@/components/ui/star-border"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
@@ -108,7 +109,7 @@ export function Bio() {
               >
                 LinkedIn
               </a>
-              <ModeToggle />
+              <ThemeToggle className="h-10" />
             </div>
             <TextShimmerWave
               className="[--base-color:#000000] [--base-gradient-color:#ffffff] dark:[--base-color:#ffffff] dark:[--base-gradient-color:#000000] text-secondary"
