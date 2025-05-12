@@ -5,6 +5,7 @@ import { Projects } from "@/components/sections/projects"
 import { Experience } from "@/components/sections/experience"
 import { Education } from "@/components/sections/education"
 import { Skills } from "@/components/sections/skills"
+import { QA } from "@/components/sections/qa"
 import { Contact } from "@/components/sections/contact"
 import { BottomDock } from "@/components/sections/dock"
 import dynamic from "next/dynamic"
@@ -33,6 +34,7 @@ export default function Home() {
           <Experience />
           <Education />
           <Skills />
+          <QA />
           <Contact />
         </div>
       </main>
