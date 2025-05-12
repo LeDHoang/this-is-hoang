@@ -17,9 +17,9 @@ export function MagicCardDemo() {
   const [customInput, setCustomInput] = useState<string>(percent)
   const [customPercent, setCustomPercent] = useState<number>(Number(percent))
   return (
-    <div className="flex w-full flex-col gap-4 lg:flex-row">
+    <div className="w-full grid gap-4 lg:grid-cols-2">
       <MagicCard
-        className="cursor-pointer flex-col items-center justify-center shadow-2xl whitespace-nowrap text-4xl"
+        className="cursor-pointer flex-col items-center justify-center shadow-2xl whitespace-nowrap text-4xl py-[5px] h-full"
         gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
       >
         <div className="relative w-full h-full flex items-center justify-center">
@@ -37,7 +37,7 @@ export function MagicCardDemo() {
         </div>
       </MagicCard>
       <MagicCard
-        className="cursor-pointer flex items-center justify-center shadow-2xl p-4"
+        className="cursor-pointer flex items-center justify-center shadow-2xl p-4 h-full"
         gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
       >
         <div className="w-full h-full flex items-center justify-center">
