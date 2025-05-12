@@ -6,11 +6,15 @@ import { CreditCard } from "@/components/ui/credit-card"
 import { PaymentInputsDemo } from "@/components/ui/payment-inputs-demo"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Label } from "@/components/ui/label"
-import { useId } from "react"
+import { useId, useState } from "react"
+import { Input } from "@/components/ui/input"
 
 export function MagicCardDemo() {
   const { theme } = useTheme()
   const id = useId()
+  const [percent, setPercent] = useState<string>("15")
+  const [customInput, setCustomInput] = useState<string>(percent)
+  const [customPercent, setCustomPercent] = useState<number>(Number(percent))
   return (
     <div className="flex w-full flex-col gap-4 lg:flex-row">
       <MagicCard
@@ -56,20 +60,36 @@ export function MagicCardDemo() {
             <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
               <RadioGroupItem value="visa" id={`${id}-visa`} className="order-1 after:absolute after:inset-0" />
               <div className="flex grow items-center gap-3">
-                <g clipPath="url(#vc-a)">
-                  <path fill="#252525" d="M28 0H4a4 4 0 0 0-4 4v16a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4Z" />
-                  <path fill="#fff" d="m15.884 8.262-1.604 7.496h-1.94l1.604-7.496h1.94Z" />
-                  <path fill="#fff" fillRule="evenodd" d="M26.207 15.758H28l-1.567-7.496H24.78a.882.882 0 0 0-.826.55l-2.91 6.946h2.037l.404-1.12h2.488l.235 1.12Zm-2.165-2.656 1.021-2.815.587 2.815h-1.608Z" clipRule="evenodd" />
-                  <path fill="#fff" d="M21.144 13.31c.005-1.183-.975-1.698-1.76-2.11-.526-.276-.964-.506-.957-.861.007-.27.263-.555.823-.628.277-.036 1.044-.065 1.913.335l.34-1.59a5.23 5.23 0 0 0-1.815-.331c-1.917 0-3.265 1.018-3.276 2.477-.013 1.08.963 1.681 1.697 2.04.756.368 1.01.604 1.006.932-.005.503-.604.726-1.16.734-.945.015-1.506-.247-1.95-.454l-.042-.02-.352 1.643c.454.208 1.29.39 2.156.398 2.038 0 3.371-1.006 3.377-2.565ZM13.112 8.262 9.97 15.758H7.92L6.374 9.775c-.094-.368-.175-.503-.46-.658-.467-.253-1.237-.49-1.914-.638l.046-.217h3.3c.42 0 .798.28.894.763l.817 4.338 2.018-5.101h2.037Z" />
-                </g>
-                <defs><clipPath id="vc-a"><path fill="#fff" d="M0 0h32v24H0z"/></clipPath></defs>
+                <svg className="shrink-0" width={32} height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <g clipPath="url(#vc-a)">
+                    <path fill="#252525" d="M28 0H4a4 4 0 0 0-4 4v16a4 4 0 0 0 4 4h24a4 4 0 0 0 4-4V4a4 4 0 0 0-4-4Z" />
+                    <path fill="#fff" d="m15.884 8.262-1.604 7.496h-1.94l1.604-7.496h1.94Z" />
+                    <path fill="#fff" fillRule="evenodd" d="M26.207 15.758H28l-1.567-7.496H24.78a.882.882 0 0 0-.826.55l-2.91 6.946h2.037l.404-1.12h2.488l.235 1.12Zm-2.165-2.656 1.021-2.815.587 2.815h-1.608Z" clipRule="evenodd" />
+                    <path fill="#fff" d="M21.144 13.31c.005-1.183-.975-1.698-1.76-2.11-.526-.276-.964-.506-.957-.861.007-.27.263-.555.823-.628.277-.036 1.044-.065 1.913.335l.34-1.59a5.23 5.23 0 0 0-1.815-.331c-1.917 0-3.265 1.018-3.276 2.477-.013 1.08.963 1.681 1.697 2.04.756.368 1.01.604 1.006.932-.005.503-.604.726-1.16.734-.945.015-1.506-.247-1.95-.454l-.042-.02-.352 1.643c.454.208 1.29.39 2.156.398 2.038 0 3.371-1.006 3.377-2.565ZM13.112 8.262 9.97 15.758H7.92L6.374 9.775c-.094-.368-.175-.503-.46-.658-.467-.253-1.237-.49-1.914-.638l.046-.217h3.3c.42 0 .798.28.894.763l.817 4.338 2.018-5.101h2.037Z" />
+                  </g>
+                  <defs>
+                    <clipPath id="vc-a">
+                      <path fill="#fff" d="M0 0h32v24H0z" />
+                    </clipPath>
+                  </defs>
+                </svg>
                 <Label htmlFor={`${id}-visa`}>Visa</Label>
               </div>
             </div>
           </RadioGroup>
         </div>
         <div className="w-full mt-4">
-          <RadioGroup className="grid grid-cols-5 gap-2 w-full" defaultValue="15">
+          <RadioGroup
+            value={percent}
+            onValueChange={(val) => {
+              setPercent(val)
+              if (val !== "custom") {
+                setCustomInput(val)
+                setCustomPercent(Number(val))
+              }
+            }}
+            className="grid grid-cols-5 gap-2 w-full"
+          >
             <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
               <RadioGroupItem value="15" id={`${id}-15`} className="order-1 after:absolute after:inset-0" />
               <Label htmlFor={`${id}-15`}>15%</Label>
@@ -91,6 +111,42 @@ export function MagicCardDemo() {
               <Label htmlFor={`${id}-custom`}>Custom</Label>
             </div>
           </RadioGroup>
+        </div>
+        {percent === "custom" && (
+          <div className="w-full mt-4">
+            <Input
+              type="number"
+              id={`${id}-custom-input`}
+              min="0"
+              className="w-full"
+              value={customInput}
+              onChange={(e) => setCustomInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') {
+                  const num = Number(customInput)
+                  if (!isNaN(num)) setCustomPercent(num)
+                }
+              }}
+              placeholder="Enter custom %"
+            />
+          </div>
+        )}
+        <div className="w-full mt-4 p-4 rounded-lg border border-input shadow-sm shadow-black/5">
+          <div className="flex justify-between text-sm mb-2">
+            <span>Coffee fee (Co-fee)</span>
+            <span>{"$" + (10000).toLocaleString()}</span>
+          </div>
+          <div className="flex justify-between text-sm mb-1">
+            <span>Tip</span>
+            <span>{"$" + (((percent === 'custom' ? customPercent : Number(percent)) / 100) * 10000).toLocaleString(undefined, {maximumFractionDigits:2})}</span>
+          </div>
+          <p className="text-xs text-muted-foreground mb-2">
+            Tip = {percent === 'custom' ? customPercent : percent}% * {"$" + (10000).toLocaleString()}
+          </p>
+          <div className="flex justify-between font-medium">
+            <span>Total</span>
+            <span>{"$" + ((10000 + ((percent === 'custom' ? customPercent : Number(percent)) / 100) * 10000)).toLocaleString(undefined, {maximumFractionDigits:2})}</span>
+          </div>
         </div>
       </MagicCard>
     </div>
