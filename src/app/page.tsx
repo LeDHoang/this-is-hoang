@@ -7,6 +7,7 @@ import { Education } from "@/components/sections/education"
 import { Skills } from "@/components/sections/skills"
 import { QA } from "@/components/sections/qa"
 import { Contact } from "@/components/sections/contact"
+import { BuyACoffee } from "@/components/sections/buy-a-coffee"
 import { BottomDock } from "@/components/sections/dock"
 import dynamic from "next/dynamic"
 import { ExpandableChatDemo } from "@/components/ui/expandable-chat-demo"
@@ -36,6 +37,7 @@ export default function Home() {
           <Skills />
           <QA />
           <Contact />
+          <BuyACoffee />
         </div>
       </main>
       <BottomDock />
