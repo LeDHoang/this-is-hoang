@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { CreditCard as CreditIcon } from "lucide-react";
 import { useId } from "react";
 import { usePaymentInputs } from "react-payment-inputs";
-import images, { type CardImages } from "react-payment-inputs/images";
+import images from "react-payment-inputs/images";
 
 export function PaymentInputsDemo() {
   const id = useId();
@@ -26,7 +26,7 @@ export function PaymentInputsDemo() {
             {meta.cardType ? (
               <svg
                 className="overflow-hidden rounded-sm"
-                {...getCardImageProps({ images: images as unknown as CardImages })}
+                {...getCardImageProps({ images })}
                 width={20}
               />
             ) : (
