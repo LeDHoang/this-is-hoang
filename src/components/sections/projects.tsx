@@ -15,6 +15,12 @@ import { ThreeDPhotoCarousel } from "@/components/ui/3d-carousel"
 import { BrandGithub } from "@mynaui/icons-react"
 import Link from "next/link"
 import { projects, categories } from "@/lib/projects"
+import { createClient } from '@supabase/supabase-js';
+
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function Projects() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
