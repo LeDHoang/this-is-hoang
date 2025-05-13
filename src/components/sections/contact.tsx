@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
+import { useTheme } from "next-themes"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -35,6 +36,7 @@ type FormValues = z.infer<typeof formSchema>
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const { theme } = useTheme()
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -159,13 +161,19 @@ export function Contact() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
-            <div>
-              <h4 className="font-semibold mb-2">Email</h4>
+            <div className="space-y-1">
+              <p className="font-medium">Email</p>
               <a
-                href="mailto:hoang@example.com"
-                className="text-primary hover:underline"
+                href="mailto:leduchoang011@gmail.com"
+                className="text-primary hover:underline block"
               >
-                hoang@example.com
+                leduchoang011@gmail.com
+              </a>
+              <a
+                href="mailto:le.hoang@ufl.edu"
+                className="text-primary hover:underline block"
+              >
+                le.hoang@ufl.edu
               </a>
             </div>
             <div>
@@ -176,7 +184,7 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
               >
-                www.linkedin.com/in/hoangleduc/
+                www.linkedin.com/in/hoangleduc
               </a>
             </div>
             <div>
@@ -187,8 +195,20 @@ export function Contact() {
                 rel="noopener noreferrer"
                 className="text-primary hover:underline"
               >
-                github.com/LeDHoang
+                www.github.com/LeDHoang
               </a>
+            </div>
+            
+            {/* Gator Animation */}
+            <div className="pt-4 border-t mt-4">
+              <div className="flex items-center justify-between">
+                <div className="text-2xl font-bold text-primary">Go Gator!!!</div>
+                <div className="relative w-full h-16 overflow-visible z-10">
+                  <div
+                    className="dotted-gator absolute top-1/2 right-0 transform -translate-y-1/2 z-20 w-16 h-16"
+                  />
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

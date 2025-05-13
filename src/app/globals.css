@@ -167,3 +167,32 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Gator animation */
+@keyframes runGator {
+  0% {
+    transform: translateX(120%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+
+/* Dotted Gator Animation */
+.dotted-gator {
+  color: var(--primary);
+  background-image: radial-gradient(currentColor 50%, transparent 50%);
+  background-size: 4px 4px;
+  background-repeat: repeat;
+  -webkit-mask-image: url('/footage/photo/crocodile-mask.png');
+  -webkit-mask-size: 120% 120%;
+  -webkit-mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-image: url('/footage/photo/crocodile-mask.png');
+  mask-size: 120% 120%;
+  mask-repeat: no-repeat;
+  mask-position: center;
+  animation: runGator 5s linear infinite;
+  position: absolute;
+  will-change: transform;
+}
