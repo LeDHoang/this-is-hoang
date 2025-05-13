@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local Environment Variables
+.env*.local
+
+# Database Schema Documentation (often generated or specific to local dev setup)
+DATABASE_SCHEMA.md
