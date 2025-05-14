@@ -203,7 +203,7 @@ export function Contact() {
             
             <div className="flex-grow flex flex-col justify-center pt-4 border-t mt-4">
               <div className="flex items-center justify-between relative top-[-40px]">
-                <div className="text-3xl font-bold text-primary">Go Gator!!!</div>
+                <div className="text-3xl font-bold italic text-primary">Go Gatorsss!!!</div>
                 <div className="relative w-1/2 overflow-visible z-10">
                   <div
                     className="dotted-gator absolute top-1/2 right-0 transform -translate-y-1/2 z-20 w-16 h-16"

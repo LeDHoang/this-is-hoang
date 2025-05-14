@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge"
 export function Education() {
   const education = {
     degree: "B.Sc. Computer Science",
-    institution: "University of Florida, FL",
+    institution: "University of Florida",
     gpa: "3.6",
     period: "Expected Aug 2025"
   }
@@ -28,14 +28,12 @@ export function Education() {
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle>{education.degree}</CardTitle>
-            <CardDescription>
-              {education.institution} • {education.period}
-            </CardDescription>
+            <CardTitle>{education.institution}</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="flex flex-wrap gap-2">
-              <Badge variant="secondary">GPA: {education.gpa}</Badge>
+            <div className="flex flex-col space-y-1">
+              <span className="font-bold text-[18px]">{education.degree}</span>
+              <span>Minor - Business Administration</span>
             </div>
           </CardContent>
         </Card>

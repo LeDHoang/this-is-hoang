@@ -12,7 +12,7 @@ const items = [
     id: "1",
     title: "What makes Hoang different? - Why should you hire me?",
     content:
-      "I am talented individual with a passion for learning and growing. I have been throughout the world and I have a unique perspective on the world, from the costal Florida to the bustling city of Hanoi and Hong Kong. I am a hardworking, dedicated, and passionate individual. I am always looking for new challenges and a chance to leave a <b>mark</b> on the world. I am a quick learner and I am always looking for new ways to improve my skills. I am a team player and I am always looking for new ways to improve my skills. ",
+      "I am talented individual with a passion for learning and growing. I have been throughout the world and gained a unique perspective on the world, from the costal Florida to the bustling city of Hanoi and Hong Kong. I am a hardworking, dedicated, and passionate individual. I am always looking for new challenges and a chance to leave a <b>mark</b> on the world. I am a quick learner and I am always looking for new ways to improve my skills. I am a team player and I am always looking for new ways to improve my skills. ",
   },
   {
     id: "2",
@@ -56,10 +56,10 @@ export function QA() {
               key={item.id}
               className="rounded-lg border bg-background px-4 py-1"
             >
-              <AccordionTrigger className="justify-start gap-3 py-2 text-[15px] leading-6 hover:no-underline [&>svg]:-order-1">
+              <AccordionTrigger className="justify-start gap-3 py-2 text-[18px] leading-6 hover:no-underline [&>svg]:-order-1">
                 {item.title}
               </AccordionTrigger>
-              <AccordionContent className="pb-2 ps-7 text-muted-foreground">
+              <AccordionContent className="pb-2 ps-7 text-muted-foreground text-[15px]">
                 <div dangerouslySetInnerHTML={{ __html: item.content.replace(/"([^"]+)"/g, '<i>"$1"</i>') }} />
               </AccordionContent>
             </AccordionItem>
