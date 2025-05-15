@@ -24,6 +24,16 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function Projects() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
+  const monthMap: Record<string, number> = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6, Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12 }
+  const sortedProjects = projects.slice().sort((a, b) => {
+    if (a.date === 'Current Project') return -1
+    if (b.date === 'Current Project') return 1
+    const [aMon, aYear] = a.date.split(' ')
+    const [bMon, bYear] = b.date.split(' ')
+    const aTime = new Date(parseInt(aYear), (monthMap[aMon as keyof typeof monthMap] || 0) - 1).getTime()
+    const bTime = new Date(parseInt(bYear), (monthMap[bMon as keyof typeof monthMap] || 0) - 1).getTime()
+    return bTime - aTime
+  })
 
   return (
     <section id="projects" className="space-y-6">
@@ -116,7 +126,7 @@ export function Projects() {
             ) : (
               <div className="w-full overflow-auto pb-4">
                 <div className="flex space-x-6 p-2">
-                  {projects
+                  {sortedProjects
                     .filter((project) => project.category === category)
                     .map((project) => {
                       const slug = project.title
