@@ -157,6 +157,46 @@ export const projects: Project[] = [
     ],
     link: "https://github.com/LeDHoang/HPWorld-DataAnalysis",
     presentationLink: "https://docs.google.com/presentation/d/19Ki-JT1panTx1nDKzkvIWd_HcwEqQLb6E1cy636BSvE/edit?usp=sharing"
+  },
+  {
+    title: "Unquire - Extreme Fashion Ecommerce project",
+    date: "Jan 2023",
+    category: "Web Design",
+    summary: "Full-stack self-created fashion brand ecommerce site built with Strapi API, MySQL database, and hosted on Hostinger VPS and domain.",
+    techStack: ["Strapi API", "MySQL", "Hostinger VPS & Domain"],
+    logs: [
+      { date: "2023-01-16", note: "Initialized repository and created README.md (First commit)" },
+      { date: "2023-01-17", note: "Configured Strapi backend with MySQL for customer and product management" },
+      { date: "2023-01-18", note: "Implemented Strapi payment processing and dynamic price handling" },
+      { date: "2023-01-19", note: "Developed website UI components and navigation" }
+    ],
+    achievements: [
+      "Deployed full-stack ecommerce site to Hostinger VPS with custom domain",
+      "Integrated secure payment handling via Strapi",
+      "Designed responsive UI for seamless user experience"
+    ],
+    link: "https://github.com/LeDHoang/Ecommerce_Uniqure"
+  },
+  {
+    title: "Instagram Clone Web Application",
+    date: "Mar 2023",
+    category: "Web Design",
+    summary: "Full-stack Instagram web application using MERN stack (MongoDB, Express.js, React.js, Node.js) and deployed on Heroku with user accounts and timeline features.",
+    techStack: ["MongoDB", "Express.js", "React.js", "Node.js", "Heroku"],
+    logs: [
+      { date: "2023-03-01", note: "Initialized MERN project structure and created base README.md" },
+      { date: "2023-03-05", note: "Configured Express.js server and MongoDB connection" },
+      { date: "2023-03-10", note: "Implemented user authentication and JWT-based session handling" },
+      { date: "2023-03-15", note: "Developed React components for user feeds and post creation" },
+      { date: "2023-03-20", note: "Configured image upload handling and integrated with frontend" },
+      { date: "2023-03-25", note: "Deployed application to Heroku and configured environment variables" }
+    ],
+    achievements: [
+      "Built Instagram-like timeline with real-time post updates",
+      "Secured user authentication with JWT",
+      "Deployed full-stack application to Heroku"
+    ],
+    link: "https://github.com/LeDHoang/Insta-MERN"
   }
 ];
 
