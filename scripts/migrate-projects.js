@@ -9,14 +9,14 @@ const fs = require('fs');
 const path = require('path');
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseServiceRoleKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-if (!supabaseUrl || !supabaseAnonKey) {
+if (!supabaseUrl || !supabaseServiceRoleKey) {
   console.error('❌ Missing Supabase environment variables. Please check your .env.local file.');
   process.exit(1);
 }
 
-const supabase = createClient(supabaseUrl, supabaseAnonKey);
+const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 
 // Define the projects data directly in this script
 // Copy from src/lib/projects.ts manually to avoid ESM import issues
@@ -303,32 +303,74 @@ async function migrate() {
         }
         const storagePath = `${slug}/${filename}`;
         const fileBuffer = fs.readFileSync(localFilePath);
-        const { error: uploadError } = await supabase.storage.from('project-photos').upload(storagePath, fileBuffer, { upsert: false });
-        if (uploadError && uploadError.statusCode !== 409) {
-          console.error('❌ Error uploading attachment:', storagePath, uploadError);
-          continue;
+        // Attempt upload with retry for transient errors
+        console.log(`📤 Uploading ${storagePath} (${fileBuffer.length} bytes)...`);
+        let uploadResponse;
+        try {
+          uploadResponse = await supabase.storage.from('project-photos').upload(storagePath, fileBuffer, { upsert: false });
+        } catch (err) {
+          console.error(`❌ Unexpected fetch error for ${storagePath}:`, err);
+          // Retry once
+          try {
+            console.log(`🔁 Retrying upload of ${storagePath}...`);
+            uploadResponse = await supabase.storage.from('project-photos').upload(storagePath, fileBuffer, { upsert: false });
+          } catch (err2) {
+            console.error(`❌ Retry failed for ${storagePath}:`, err2);
+            continue;
+          }
+        }
+        const { data: uploadData, error: uploadError } = uploadResponse;
+        // Handle storage errors: treat duplicate (409) as non-fatal
+        if (uploadError) {
+          const code = uploadError.statusCode;
+          if (code === 409 || code === '409') {
+            console.log(`ℹ️ ${storagePath} already exists in storage, proceeding to DB upsert`);
+          } else {
+            console.error(`❌ Storage API returned error for ${storagePath}:`, uploadError);
+            continue;
+          }
+        } else {
+          console.log(`✅ Uploaded to ${uploadData.fullPath}`);
         }
         const { data: { publicUrl } } = supabase.storage.from('project-photos').getPublicUrl(storagePath);
+        // Look up any existing attachment by URL (regardless of log) to upsert metadata and log assignment
         const { data: existingAttachment } = await supabase
           .from('project_log_attachments')
-          .select('id')
-          .eq('project_log_id', projectLogId)
+          .select('id, project_log_id, type, caption')
           .eq('url', publicUrl)
           .single();
         if (existingAttachment) {
-          console.log(`ℹ️ Attachment already exists in DB for ${storagePath}. Skipping insertion.`);
-          continue;
-        }
-        const { error: attachmentError } = await supabase.from('project_log_attachments').insert({
-          project_log_id: projectLogId,
-          url: publicUrl,
-          type,
-          caption,
-        });
-        if (attachmentError) {
-          console.error('❌ Error inserting attachment record for:', publicUrl, attachmentError);
+          // Determine if any fields need updating
+          const needsUpdate =
+            existingAttachment.project_log_id !== projectLogId ||
+            existingAttachment.type !== type ||
+            existingAttachment.caption !== caption;
+          if (needsUpdate) {
+            const { error: updateError } = await supabase
+              .from('project_log_attachments')
+              .update({ project_log_id: projectLogId, type, caption })
+              .eq('id', existingAttachment.id);
+            if (updateError) {
+              console.error('❌ Error updating attachment record for:', existingAttachment.id, updateError);
+            } else {
+              console.log(`🔄 Updated attachment record for log ${logDate}: ${filename}`);
+            }
+          } else {
+            console.log(`ℹ️ Attachment already up to date for ${filename}`);
+          }
         } else {
-          console.log(`✅ Inserted attachment record for log ${logDate}: ${filename}`);
+          // Insert new attachment record
+          const { error: insertError } = await supabase.from('project_log_attachments').insert({
+            project_log_id: projectLogId,
+            url: publicUrl,
+            type,
+            caption,
+          });
+          if (insertError) {
+            console.error('❌ Error inserting attachment record for:', publicUrl, insertError);
+          } else {
+            console.log(`✅ Inserted attachment record for log ${logDate}: ${filename}`);
+          }
         }
       }
     } else {

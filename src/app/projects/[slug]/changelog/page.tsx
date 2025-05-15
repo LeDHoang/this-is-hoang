@@ -39,7 +39,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
             {log.project_log_attachments.map((att) => (
               <div key={att.id}>
-                {att.type === "image" ? (
+                {['image','png','jpg','jpeg','gif'].includes(att.type.toLowerCase()) ? (
                   <img src={att.url} alt={att.caption} className="max-w-full h-auto rounded" />
                 ) : (
                   <a href={att.url} target="_blank" rel="noopener noreferrer">
