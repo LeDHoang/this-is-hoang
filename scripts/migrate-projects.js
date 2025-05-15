@@ -290,6 +290,9 @@ async function migrate() {
       lines.shift(); // remove header row
       for (const line of lines) {
         const [filename, logDate, type, ...captionParts] = line.split(',');
+        // Normalize webp type as jpg for upsert
+        let fileType = type.trim().toLowerCase();
+        if (fileType === 'webp') fileType = 'jpg';
         const caption = captionParts.join(',').trim();
         const projectLogId = logsMap[logDate];
         if (!projectLogId) {
@@ -343,12 +346,12 @@ async function migrate() {
           // Determine if any fields need updating
           const needsUpdate =
             existingAttachment.project_log_id !== projectLogId ||
-            existingAttachment.type !== type ||
+            existingAttachment.type !== fileType ||
             existingAttachment.caption !== caption;
           if (needsUpdate) {
             const { error: updateError } = await supabase
               .from('project_log_attachments')
-              .update({ project_log_id: projectLogId, type, caption })
+              .update({ project_log_id: projectLogId, type: fileType, caption })
               .eq('id', existingAttachment.id);
             if (updateError) {
               console.error('❌ Error updating attachment record for:', existingAttachment.id, updateError);
@@ -363,7 +366,7 @@ async function migrate() {
           const { error: insertError } = await supabase.from('project_log_attachments').insert({
             project_log_id: projectLogId,
             url: publicUrl,
-            type,
+            type: fileType,
             caption,
           });
           if (insertError) {
