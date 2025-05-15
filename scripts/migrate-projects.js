@@ -32,7 +32,8 @@ const projects = [
       { date: "2024-10-01", note: "Implemented local speech-to-text using Whisper with emotion detection capabilities" },
       { date: "2024-10-20", note: "Integrated OpenAI Realtime API for enhanced conversation fluidity and response quality" },
       { date: "2024-11-05", note: "Developed emotional text-to-speech synthesis with voice modulation based on context" },
-      { date: "2024-11-25", note: "Currently optimizing latency and implementing memory for personalized emotional responses" }
+      { date: "2024-11-25", note: "Currently optimizing latency and implementing memory for personalized emotional responses" },
+      { date: "2024-12-01", note: "Implemented memory system that adapts conversation style based on emotional history" }
     ],
     achievements: [
       "Created hybrid AI system with <0.5 second response time using API mode",
@@ -190,10 +191,10 @@ async function migrate() {
 
   for (const project of projects) {
     // derive slug
-    const slug = project.title
-      .toLowerCase()
-      .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, '');
+    let slug = project.title.toLowerCase();
+    // normalize slug: replace spaces, remove invalid chars, collapse dashes, trim
+    slug = slug.replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+    slug = slug.replace(/-+/g, '-').replace(/^-+|-+$/g, '');
 
     console.log(`🔄 Processing project: ${project.title} (slug: ${slug})`);
     
@@ -260,35 +261,78 @@ async function migrate() {
       console.log(`✅ Inserted project: ${project.title} (id=${projectId})`);
     }
 
-    // Delete existing logs for this project to avoid duplicates
-    const { error: deleteError } = await supabase
-      .from('project_logs')
-      .delete()
-      .eq('project_id', projectId);
-
-    if (deleteError) {
-      console.error('❌ Error deleting existing logs for project:', project.title, deleteError);
-    } else {
-      console.log(`🧹 Cleared existing logs for project: ${project.title}`);
+    // Idempotently upsert logs and map their IDs
+    const logsMap = {};
+    console.log(`📝 Upserting ${project.logs.length} logs for project: ${project.title}`);
+    for (const log of project.logs) {
+      const { data: upsertedLogs, error: logError } = await supabase
+        .from('project_logs')
+        .upsert(
+          [{ project_id: projectId, log_date: log.date, note: log.note }],
+          { onConflict: ['project_id', 'log_date'] }
+        )
+        .select('id,log_date');
+      if (logError) {
+        console.error('❌ Error upserting log:', log.date, logError);
+      } else {
+        const entry = Array.isArray(upsertedLogs) ? upsertedLogs[0] : upsertedLogs;
+        logsMap[entry.log_date] = entry.id;
+        console.log(`✅ Upserted log: ${entry.log_date}`);
+      }
     }
 
-    // Insert logs
-    console.log(`📝 Inserting ${project.logs.length} logs for project: ${project.title}`);
-    
-    for (const log of project.logs) {
-      const { error: logError } = await supabase
-        .from('project_logs')
-        .insert({
-          project_id: projectId,
-          log_date: log.date,
-          note: log.note,
+    // Handle attachments.csv for project photos
+    const attachmentsCsvPath = path.join(__dirname, '..', 'public', 'project-photos', slug, 'attachments.csv');
+    if (fs.existsSync(attachmentsCsvPath)) {
+      console.log(`📎 Found attachments CSV for project: ${project.title}`);
+      const csvContent = fs.readFileSync(attachmentsCsvPath, 'utf8');
+      const lines = csvContent.split(/\r?\n/).filter(line => line.trim() !== '');
+      lines.shift(); // remove header row
+      for (const line of lines) {
+        const [filename, logDate, type, ...captionParts] = line.split(',');
+        const caption = captionParts.join(',').trim();
+        const projectLogId = logsMap[logDate];
+        if (!projectLogId) {
+          console.warn(`⚠️ No log entry found for date ${logDate}. Skipping attachment ${filename}.`);
+          continue;
+        }
+        const localFilePath = path.join(__dirname, '..', 'public', 'project-photos', slug, filename);
+        if (!fs.existsSync(localFilePath)) {
+          console.warn(`⚠️ Attachment file not found: ${localFilePath}. Skipping.`);
+          continue;
+        }
+        const storagePath = `${slug}/${filename}`;
+        const fileBuffer = fs.readFileSync(localFilePath);
+        const { error: uploadError } = await supabase.storage.from('project-photos').upload(storagePath, fileBuffer, { upsert: false });
+        if (uploadError && uploadError.statusCode !== 409) {
+          console.error('❌ Error uploading attachment:', storagePath, uploadError);
+          continue;
+        }
+        const { data: { publicUrl } } = supabase.storage.from('project-photos').getPublicUrl(storagePath);
+        const { data: existingAttachment } = await supabase
+          .from('project_log_attachments')
+          .select('id')
+          .eq('project_log_id', projectLogId)
+          .eq('url', publicUrl)
+          .single();
+        if (existingAttachment) {
+          console.log(`ℹ️ Attachment already exists in DB for ${storagePath}. Skipping insertion.`);
+          continue;
+        }
+        const { error: attachmentError } = await supabase.from('project_log_attachments').insert({
+          project_log_id: projectLogId,
+          url: publicUrl,
+          type,
+          caption,
         });
-        
-      if (logError) {
-        console.error('❌ Error inserting log:', log.date, logError);
-      } else {
-        console.log(`✅ Inserted log: ${log.date}`);
+        if (attachmentError) {
+          console.error('❌ Error inserting attachment record for:', publicUrl, attachmentError);
+        } else {
+          console.log(`✅ Inserted attachment record for log ${logDate}: ${filename}`);
+        }
       }
+    } else {
+      console.log(`ℹ️ No attachments.csv found for project: ${project.title}`);
     }
   }
   

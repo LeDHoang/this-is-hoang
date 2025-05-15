@@ -21,13 +21,15 @@ const experiences = [
       "Designed and implemented a centralized, multi-site fraud detection model using Python, TensorFlow, and TCNN",
       "Streamlined ETL processes and improved model efficiency with hyperparameter tuning via Optuna",
       "Leveraged ClearML for performance evaluation and monitoring",
+      "Recognized as the #1 Software Engineering team in the program and delivered an executive-level presentation to the Gainesville Chamber of Commerce.",
       "Worked with diverse teams to integrate a user-friendly UI into the C-Suite system"
     ],
     techStack: ["Python", "TensorFlow", "TCNN", "Optuna", "ClearML"],
     achievements: [
       "Boosted detection accuracy by 20%",
       "Cut training time by 50% through hyperparameter optimization",
-      "Enhanced oversight and expedited anomaly detection across 16 sites"
+      "Enhanced oversight and expedited anomaly detection across 16 sites",
+      "#1 Software Engineering team in the program and delivered an executive-level presentation to the Gainesville Chamber of Commerce."
     ]
   },
   {
