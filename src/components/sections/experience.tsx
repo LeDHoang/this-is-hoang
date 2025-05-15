@@ -30,7 +30,8 @@ const experiences = [
       "Cut training time by 50% through hyperparameter optimization",
       "Enhanced oversight and expedited anomaly detection across 16 sites",
       "#1 Software Engineering team in the program and delivered an executive-level presentation to the Gainesville Chamber of Commerce."
-    ]
+    ],
+    videoUrl: "https://www.youtube.com/embed/C-FGNGZRKQE"
   },
   {
     id: "eufinity",
@@ -170,6 +171,21 @@ export function Experience() {
                         ))}
                       </div>
                     </div>
+                    {experience.videoUrl && (
+                      <div className="space-y-2">
+                        <h4 className="font-semibold">Video Playback</h4>
+                        <div className="flex overflow-x-auto gap-2">
+                          <iframe
+                            src={experience.videoUrl}
+                            title={`${experience.company} video playback`}
+                            className="h-72 w-72 rounded-md"
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
               </CardContent>
