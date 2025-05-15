@@ -61,13 +61,14 @@ export const projects: Project[] = [
     title: "DeepSeekResearch: Multi-Agent Research Assistant",
     date: "Jan 2025",
     category: "Machine Learning",
-    summary: "Built a multi-agent AI research assistant using CrewAI and LangChain, guiding users through automated search, analysis, and structured report generation via a Streamlit interface.",
+    summary: "Built a multi-agent AI research assistant using CrewAI and LangChain, with dynamic model switching between local Deepseek R1 via Ollama and OpenAI model o1 through their API, guiding users through automated search, analysis, and structured report generation via a Streamlit interface.",
     techStack: ["Python", "Streamlit", "CrewAI", "LangChain", "OpenAI API", "Docker"],
     logs: [
       { date: "2024-11-20", note: "Scaffolded multi-agent architecture; defined agent roles" },
       { date: "2024-12-05", note: "Integrated advanced search tools; implemented prompt chaining" },
       { date: "2024-12-20", note: "Designed Streamlit UI for prompt refinement & report output" },
-      { date: "2025-01-10", note: "Conducted user testing; iterated on UI & agent workflows" }
+      { date: "2025-01-10", note: "Conducted user testing; iterated on UI & agent workflows" },
+      { date: "2025-01-20", note: "Implemented dynamic switching between local Deepseek R1 (via Ollama) and OpenAI o1 model through API for flexible deployment" }
     ],
     achievements: [
       "Reduced research synthesis time by 50% in pilot tests",
