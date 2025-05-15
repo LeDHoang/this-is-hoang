@@ -2,6 +2,7 @@ import { Timeline } from "@/components/ui/timeline";
 import { supabase } from "@/lib/supabase";
 import { BottomDock } from "@/components/sections/dock";
 import { ExpandableChatDemo } from "@/components/ui/expandable-chat-demo";
+import { TimelineAttachments } from "@/components/ui/TimelineAttachments";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -36,19 +37,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       <div className="text-sm text-secondary-foreground mb-4">
         <p>{log.note}</p>
         {log.project_log_attachments?.length > 0 && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
-            {log.project_log_attachments.map((att) => (
-              <div key={att.id}>
-                {['image','png','jpg','jpeg','gif'].includes(att.type.toLowerCase()) ? (
-                  <img src={att.url} alt={att.caption} className="max-w-full h-auto rounded" />
-                ) : (
-                  <a href={att.url} target="_blank" rel="noopener noreferrer">
-                    {att.caption}
-                  </a>
-                )}
-              </div>
-            ))}
-          </div>
+          <TimelineAttachments attachments={log.project_log_attachments} />
         )}
       </div>
     ),
