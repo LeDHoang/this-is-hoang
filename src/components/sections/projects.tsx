@@ -132,7 +132,9 @@ export function Projects() {
                       const slug = project.title
                         .toLowerCase()
                         .replace(/\s+/g, '-')
-                        .replace(/[^a-z0-9-]/g, '');
+                        .replace(/[^a-z0-9-]/g, '')
+                        .replace(/-+/g, '-')
+                        .replace(/^-+|-+$/g, '');
                       return (
                         <Card 
                           key={project.title} 
