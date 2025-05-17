@@ -49,30 +49,24 @@ export function Contact() {
 
   async function onSubmit(values: FormValues) {
     setIsSubmitting(true)
-    
     try {
-      // You would typically send this to an API endpoint
-      // Replace with your actual API endpoint
-      // const response = await fetch('/api/contact', {
-      //   method: 'POST',
-      //   body: JSON.stringify(values),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //   },
-      // });
-      
-      // Simulating API call with timeout
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // if (!response.ok) throw new Error('Failed to send message');
-      
-      toast.success("Message sent successfully!");
-      form.reset();
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      })
+      if (!response.ok) {
+        throw new Error('Failed to send message')
+      }
+      toast.success('Message sent successfully!')
+      form.reset()
     } catch (error) {
-      console.error("Error sending message:", error);
-      toast.error("Failed to send message. Please try again later.");
+      console.error('Error sending message:', error)
+      toast.error('Failed to send message. Please try again later.')
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
   }
 
