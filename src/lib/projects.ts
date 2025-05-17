@@ -198,6 +198,25 @@ export const projects: Project[] = [
       "Deployed full-stack application to Heroku"
     ],
     link: "https://github.com/LeDHoang/Insta-MERN"
+  },
+  {
+    title: "This-is-Hoang",
+    date: "May 2025",
+    category: "Web Design",
+    summary: "A modern, responsive personal portfolio website built with Next.js, React, shadcn/ui, Tailwind CSS, and Supabase, featuring dark/light mode, dynamic project showcases, and an AI chatbot.",
+    techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "Framer Motion"],
+    logs: [
+      { date: "2025-05-01", note: "Scaffolded Next.js application with Tailwind CSS and shadcn/ui" },
+      { date: "2025-05-03", note: "Implemented dynamic project showcase and photography galleries" },
+      { date: "2025-05-05", note: "Integrated Supabase backend and AI chatbot feature" },
+      { date: "2025-05-07", note: "Deployed site to Vercel and optimized for SEO" }
+    ],
+    achievements: [
+      "Built modern responsive UI with Next.js and Tailwind CSS",
+      "Implemented AI-powered chat feature using Supabase vector embeddings",
+      "Deployed site to Vercel with CI/CD and environment variable management"
+    ],
+    link: "https://github.com/LeDHoang/this-is-hoang"
   }
 ];
 

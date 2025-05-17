@@ -42,8 +42,8 @@ A modern, responsive portfolio website built with Next.js, React, shadcn/ui, Tai
 
 1.  Clone the repository:
     ```bash
-    git clone https://github.com/yourusername/portfolio.git
-    cd portfolio
+    git clone https://github.com/LeDHoang/this-is-hoang.git
+    cd this-is-hoang
     ```
 
 2.  Install dependencies:

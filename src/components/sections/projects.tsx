@@ -202,11 +202,19 @@ export function Projects() {
                                 </div>
                               )}
                               <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
-                                <Button asChild variant="outline" className="px-2">
-                                  <Link href={`/projects/${slug}/changelog`} className="inline-flex items-center">
-                                    Changelog <ExternalLink className="ml-1 h-4 w-4" />
-                                  </Link>
-                                </Button>
+                                {project.title === "Personal Portfolio Website" ? (
+                                  <Button asChild variant="outline" className="px-2">
+                                    <Link href="#bio" className="inline-flex items-center">
+                                      View
+                                    </Link>
+                                  </Button>
+                                ) : (
+                                  <Button asChild variant="outline" className="px-2">
+                                    <Link href={`/projects/${slug}/changelog`} className="inline-flex items-center">
+                                      Changelog <ExternalLink className="ml-1 h-4 w-4" />
+                                    </Link>
+                                  </Button>
+                                )}
                                 {project.presentationLink && (
                                   <Button asChild variant="outline" className="px-2">
                                     <a href={project.presentationLink} target="_blank" rel="noopener noreferrer">
