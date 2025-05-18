@@ -196,3 +196,101 @@ body {
   position: absolute;
   will-change: transform;
 }
+
+@layer components {
+  .card-hover {
+    position: relative;
+    z-index: 0;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 255, 140, 0.2);
+  }
+
+  .card-hover:hover {
+    position: relative;
+    z-index: 10;
+    transform: translateY(-5px);
+    box-shadow: 0 0 8px rgba(0, 255, 140, 0.6), 0 10px 20px rgba(0, 255, 140, 0.2);
+    border-color: rgba(0, 255, 140, 0.6);
+  }
+
+  /* Terminal window styles */
+  .terminal-window {
+    border: 1px solid rgba(0, 255, 140, 0.5);
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 1rem;
+    position: relative;
+  }
+
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 255, 140, 0.3);
+  }
+
+  .terminal-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 6px;
+  }
+
+  .terminal-button-red {
+    background-color: #ff5f56;
+  }
+  .terminal-button-yellow {
+    background-color: #ffbd2e;
+  }
+  .terminal-button-green {
+    background-color: #27c93f;
+  }
+
+  .terminal-title {
+    margin-left: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .terminal-content {
+    font-family: monospace;
+    line-height: 1.5;
+  }
+
+  .text-primary {
+    color: #00ff8c;
+  }
+
+  .terminal-cursor {
+    display: inline-block;
+    width: 10px;
+    height: 1.2em;
+    background-color: #00ff8c;
+    animation: blink 1s step-end infinite;
+    vertical-align: text-bottom;
+    margin-left: 2px;
+  }
+
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+}
+
+/* Override card-hover in utilities layer to ensure glow effect */
+@layer utilities {
+  .card-hover {
+    /* Reset any default shadow and border from Card component */
+    box-shadow: none;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 255, 140, 0.2);
+  }
+
+  .card-hover:hover,
+  .card-hover.expanded {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 255, 140, 0.2);
+    border: 1px solid rgba(0, 255, 140, 0.6);
+  }
+}

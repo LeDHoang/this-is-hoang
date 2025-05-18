@@ -136,11 +136,11 @@ export function Projects() {
                         .replace(/-+/g, '-')
                         .replace(/^-+|-+$/g, '');
                       return (
-                        <Card 
-                          key={project.title} 
+                        <Card
+                          key={project.title}
                           className={cn(
-                            "w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
-                            expandedCard === project.title && "w-[600px] min-w-[600px]"
+                            "card-hover rounded-md overflow-hidden w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
+                            expandedCard === project.title && "expanded w-[600px] min-w-[600px]"
                           )}
                         >
                           <CardHeader>

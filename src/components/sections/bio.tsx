@@ -12,8 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { TextShimmerWave } from "@/components/ui/text-shimmer-wave"
-import { StarBorder } from "@/components/ui/star-border"
 import { ThemeToggle } from "@/components/ui/theme-toggle"
+import Terminal from "../ui/terminal"
+import { TypingText } from "../ui/typing-text"
 
 export function ModeToggle() {
   const { setTheme, theme } = useTheme()
@@ -63,16 +64,10 @@ export function ModeToggle() {
 
 export function Bio() {
   return (
-    <StarBorder 
-      as="div" 
-      id="bio" 
-      className="flex flex-col items-center w-full max-w-4xl mx-auto my-8"
-      color="hsl(var(--primary))"
-      speed="8s"
-    >
-      <section className="w-full">
-        <div className="flex flex-col md:flex-row items-start gap-8 w-full">
-          <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0 mx-auto md:mx-0">
+    <Terminal id="bio" className="w-full max-w-4xl mx-auto my-8" showPrompt={false}>
+      <div className="w-full">
+        <div className="flex items-start gap-8 w-full">
+          <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0">
             <Image
               src="/profile.jpg"
               alt="Hoang Le"
@@ -89,21 +84,25 @@ export function Bio() {
               </p>
               <p className="text-muted-foreground">Gainesville, FL</p>
             </div>
-            <p className="text-muted-foreground">
-            Motivated Computer Science student with hands-on experience in Machine Learning, NLP, and Generative AI, specializing in building innovative, production-ready solutions. 
+            <p className="flex items-start text-muted-foreground">
+              <span className="text-primary mr-2">$</span>
+              <TypingText
+                text="Motivated Computer Science student with hands-on experience in Machine Learning, NLP, and Generative AI, specializing in building innovative, production-ready solutions."
+                typingSpeed={40}
+              />
             </p>
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://github.com/LeDHoang" 
-                target="_blank" 
+              <a
+                href="https://github.com/LeDHoang"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
                 GitHub
               </a>
-              <a 
-                href="https://www.linkedin.com/in/hoangleduc/" 
-                target="_blank" 
+              <a
+                href="https://www.linkedin.com/in/hoangleduc/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2"
               >
@@ -118,7 +117,7 @@ export function Bio() {
             </TextShimmerWave>
           </div>
         </div>
-      </section>
-    </StarBorder>
+      </div>
+    </Terminal>
   )
 } 
