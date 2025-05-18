@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/ui/footer";
 import { Eye } from "@mynaui/icons-react";
+import { Navigation } from "@/components/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           enableColorScheme
           storageKey="hoang-theme"
         >
+          <Navigation />
           {children}
           <Toaster position="top-right" />
           <Footer
