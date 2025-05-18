@@ -160,13 +160,13 @@ export function Contact() {
                 <p className="font-medium">Email</p>
                 <a
                   href="mailto:leduchoang011@gmail.com"
-                  className="text-primary hover:underline block"
+                  className="text-white hover:underline block"
                 >
                   leduchoang011@gmail.com
                 </a>
                 <a
                   href="mailto:le.hoang@ufl.edu"
-                  className="text-primary hover:underline block"
+                  className="text-white hover:underline block"
                 >
                   le.hoang@ufl.edu
                 </a>
@@ -177,7 +177,7 @@ export function Contact() {
                   href="https://www.linkedin.com/in/hoangleduc/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-primary hover:underline"
+                  className="text-white hover:underline"
                 >
                   www.linkedin.com/in/hoangleduc
                 </a>
@@ -189,7 +189,7 @@ export function Contact() {
                 href="https://github.com/LeDHoang"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-primary hover:underline"
+                className="text-white hover:underline"
               >
                 www.github.com/LeDHoang
               </a>

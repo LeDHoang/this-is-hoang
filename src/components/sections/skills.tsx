@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import Terminal from "@/components/ui/terminal"
 
 const skillGroups = [
   {
@@ -56,37 +56,21 @@ export function Skills() {
       <h2 className="text-3xl font-bold">Skills</h2>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {skillGroups.map((group) => (
-          <Card key={group.title}>
-            <CardHeader>
-              <CardTitle>{group.title}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-4">
-                {group.skills.map((skill) => (
-                  <div key={skill.name} className="space-y-2">
-                    <div className="flex justify-between">
-                      <span className="font-medium">{skill.name}</span>
-                      <span className="text-sm text-muted-foreground">{skill.level}</span>
-                    </div>
-                    <div className="h-2 w-full bg-muted rounded-full overflow-hidden">
-                      <div
-                        className="h-full bg-primary transition-all"
-                        style={{
-                          width: `${
-                            skill.level === "Expert"
-                              ? "100%"
-                              : skill.level === "Advanced"
-                              ? "80%"
-                              : "60%"
-                          }`
-                        }}
-                      />
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
+          <Terminal
+            key={group.title}
+            title={`${group.title.replace(/\s+/g, "_").toLowerCase()}.sh`}
+            className="w-full"
+            showPrompt={false}
+          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {group.skills.map((skill) => (
+                <div key={skill.name} className="flex items-center gap-2">
+                  <span className="text-primary text-[1.1rem]">$</span>
+                  <span className="text-white text-[1.1rem]">{skill.name}</span>
+                </div>
+              ))}
+            </div>
+          </Terminal>
         ))}
       </div>
     </section>
