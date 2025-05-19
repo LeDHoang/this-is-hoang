@@ -5,6 +5,7 @@ import { Projects } from "@/components/sections/projects"
 import { Experience } from "@/components/sections/experience"
 import { Education } from "@/components/sections/education"
 import { Skills } from "@/components/sections/skills"
+import { Blog } from "@/components/sections/blog"
 import { QA } from "@/components/sections/qa"
 import { Contact } from "@/components/sections/contact"
 import { BuyACoffee } from "@/components/sections/buy-a-coffee"
@@ -35,6 +36,7 @@ export default function Home() {
           <Experience />
           <Education />
           <Skills />
+          <Blog />
           <QA />
           <Contact />
           <BuyACoffee />
