@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import { notFound } from "next/navigation"
 import Link from "next/link"
@@ -11,7 +9,7 @@ interface BlogPostPageProps {
   }
 }
 
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { id } = params
 
   const posts: Record<string, { title: string; date: string; readingTime: string; content: string }> = {
@@ -178,7 +176,7 @@ const memoizedCallback = useCallback(() => doSomething(a, b), [a, b]);
             <ArrowLeft size={16} /> Back to blog
           </Link>
 
-          <article>
+          <article className="blog-post card-hover bg-black bg-opacity-50 p-8 rounded-lg">
             <div className="mb-8">
               <h1 className="text-3xl font-bold mb-4 glitch" data-text={post.title}>
                 {post.title}
@@ -186,18 +184,18 @@ const memoizedCallback = useCallback(() => doSomething(a, b), [a, b]);
 
               <div className="flex items-center gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-1">
-                  <CalendarIcon size={14} />
+                  <CalendarIcon size={14} className="text-primary" />
                   <span>{post.date}</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Clock size={14} />
+                  <Clock size={14} className="text-primary" />
                   <span>{post.readingTime}</span>
                 </div>
               </div>
             </div>
 
             <div
-              className="prose prose-invert max-w-none prose-headings:text-primary prose-a:text-primary"
+              className="prose prose-invert max-w-none prose-headings:text-primary prose-a:text-primary prose-pre:border-primary/30 prose-pre:shadow-glow"
               dangerouslySetInnerHTML={{ __html: post.content }}
             />
           </article>

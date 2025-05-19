@@ -4,6 +4,8 @@ import { BottomDock } from "@/components/sections/dock";
 import { ExpandableChatDemo } from "@/components/ui/expandable-chat-demo";
 import { TimelineAttachments } from "@/components/ui/TimelineAttachments";
 import { projects as staticProjects } from "@/lib/projects";
+import Link from "next/link";
+import { ArrowLeft } from "lucide-react";
 
 export default async function Page({ params }: { params: { slug: string } }) {
   const { slug } = params;
@@ -68,12 +70,21 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-      <div className="max-w-4xl mx-auto p-6">
-        <Timeline
-          data={data}
-          title={`${projectTitle} Changelog`}
-          description={projectSummary}
-        />
+      <div className="container mx-auto px-4 py-8 pt-16 md:pt-20">
+        <div className="max-w-4xl mx-auto relative">
+          <Link 
+            href="/#projects" 
+            className="absolute -top-12 left-0 inline-flex items-center gap-2 text-primary hover:underline mb-6 z-10 md:-top-14">
+            <ArrowLeft size={16} /> Back to projects
+          </Link>
+          <div className="card-hover blog-post bg-black bg-opacity-50 p-8 rounded-lg">
+            <Timeline
+              data={data}
+              title={`${projectTitle} Changelog`}
+              description={projectSummary}
+            />
+          </div>
+        </div>
       </div>
       <BottomDock />
       <ExpandableChatDemo />

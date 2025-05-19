@@ -279,8 +279,9 @@ body {
   /* Glitch effect for brand title */
   .glitch {
     position: relative;
-    color: white;
+    color: hsl(var(--foreground));
     font-weight: bold;
+    z-index: 1;
   }
   .glitch::before,
   .glitch::after {
@@ -293,7 +294,7 @@ body {
     opacity: 0;
   }
   .glitch::before {
-    color: #00ff8c;
+    color: hsl(var(--primary));
     z-index: -1;
   }
   .glitch::after {
@@ -338,4 +339,160 @@ body {
     box-shadow: 0 10px 20px rgba(0, 255, 140, 0.2);
     border: 3px solid rgba(0, 255, 140, 0.6);
   }
+}
+
+/* Cyberpunk Blog Post Styling */
+.prose {
+  color: white;
+  font-size: 1rem;
+  line-height: 1.75;
+}
+
+/* Override Tailwind Typography for cyberpunk style */
+.prose :where(h1, h2, h3, h4, h5, h6):not(:where([class~="not-prose"] *)) {
+  color: #00ff8c;
+  font-weight: 700;
+  margin-top: 2em;
+  margin-bottom: 1em;
+}
+
+.prose :where(h1):not(:where([class~="not-prose"] *)) {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+}
+
+.prose :where(h2):not(:where([class~="not-prose"] *)) {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.prose :where(h3):not(:where([class~="not-prose"] *)) {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+.prose :where(p):not(:where([class~="not-prose"] *)) {
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: #00ff8c;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  transition: all 0.2s ease;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)):hover {
+  text-decoration-thickness: 2px;
+  text-shadow: 0 0 8px rgba(0, 255, 140, 0.5);
+}
+
+.prose :where(pre):not(:where([class~="not-prose"] *)) {
+  background-color: #1f2937;
+  border: 1px solid rgba(0, 255, 140, 0.3);
+  border-radius: 0.375rem;
+  color: #e5e7eb;
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  line-height: 1.7142857;
+  margin-top: 1.7142857em;
+  margin-bottom: 1.7142857em;
+  overflow-x: auto;
+  padding: 1.1428571em;
+}
+
+.prose :where(code):not(:where([class~="not-prose"] *)) {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 0.25rem;
+  padding: 0.25em 0.375em;
+  color: white;
+}
+
+.prose :where(ul):not(:where([class~="not-prose"] *)) {
+  list-style-type: disc;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose :where(ol):not(:where([class~="not-prose"] *)) {
+  list-style-type: decimal;
+  margin-top: 1.25em;
+  margin-bottom: 1.25em;
+  padding-left: 1.625em;
+}
+
+.prose :where(li):not(:where([class~="not-prose"] *)) {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+.prose :where(blockquote):not(:where([class~="not-prose"] *)) {
+  font-style: italic;
+  border-left: 4px solid #00ff8c;
+  padding-left: 1em;
+  margin-top: 1.6em;
+  margin-bottom: 1.6em;
+}
+
+/* Responsive typography for blog posts */
+@media (max-width: 640px) {
+  .prose :where(h1):not(:where([class~="not-prose"] *)) {
+    font-size: 2rem;
+    line-height: 2.25rem;
+  }
+  
+  .prose :where(h2):not(:where([class~="not-prose"] *)) {
+    font-size: 1.4rem;
+    line-height: 1.75rem;
+  }
+}
+
+/* Make sure code block pre elements have cyberpunk styling */
+.prose pre {
+  border: 1px solid rgba(0, 255, 140, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 0 4px rgba(0, 255, 140, 0.4);
+}
+
+/* Blog post container cyberpunk styling */
+.blog-post {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid rgba(0, 255, 140, 0.4);
+  transition: all 0.3s ease;
+}
+
+.blog-post::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid rgba(0, 255, 140, 0.1);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.blog-post:hover {
+  border-color: rgba(0, 255, 140, 0.7);
+  box-shadow: 0 0 15px rgba(0, 255, 140, 0.3);
+}
+
+/* Additional utilities for cyberpunk styling */
+.shadow-glow {
+  box-shadow: 0 0 8px rgba(0, 255, 140, 0.5);
+}
+
+/* Enhanced list styling for cyberpunk theme */
+.prose ul li::marker {
+  color: #00ff8c;
+}
+
+.prose ol li::marker {
+  color: #00ff8c;
 }
