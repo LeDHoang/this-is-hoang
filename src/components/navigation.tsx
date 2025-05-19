@@ -6,10 +6,10 @@ import { Menu, X } from "lucide-react"
 export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navItems = [
-    { label: "home", href: "#home" },
-    { label: "project", href: "#projects" },
-    { label: "experience", href: "#experience" },
-    { label: "blog", href: "#blog" },
+    { label: "home", href: "/#home" },
+    { label: "project", href: "/#projects" },
+    { label: "experience", href: "/#experience" },
+    { label: "blog", href: "/blog" },
   ]
 
   return (
@@ -18,7 +18,7 @@ export function Navigation() {
         <nav className="flex items-center justify-between w-full">
           {/* Brand */}
           <a
-            href="#home"
+            href="/#home"
             className="text-2xl font-bold text-white glitch leading-none select-none"
             data-text="THIS-IS-HOANG"
           >

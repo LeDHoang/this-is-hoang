@@ -214,7 +214,7 @@ body {
 
   /* Terminal window styles */
   .terminal-window {
-    border: 1px solid rgba(0, 255, 140, 0.5);
+    border: 2px solid rgba(0, 255, 140, 0.5);
     background-color: rgba(0, 0, 0, 0.8);
     border-radius: 4px;
     padding: 1rem;
@@ -226,7 +226,7 @@ body {
     align-items: center;
     margin-bottom: 0.5rem;
     padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(0, 255, 140, 0.3);
+    border-bottom: 2px solid rgba(0, 255, 140, 0.3);
   }
 
   .terminal-button {

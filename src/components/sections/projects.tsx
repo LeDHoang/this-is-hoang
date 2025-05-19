@@ -146,7 +146,7 @@ export function Projects() {
                           <CardHeader>
                             <div className="flex justify-between items-start">
                               <div>
-                                <CardTitle>{project.title}</CardTitle>
+                                <CardTitle className="glitch" data-text={project.title}>{project.title}</CardTitle>
                                 <CardDescription>{project.date}</CardDescription>
                                 <Button asChild variant="outline" size="icon" aria-label="View Project" className="mt-1">
                                   <a href={project.link} target="_blank" rel="noopener noreferrer">
