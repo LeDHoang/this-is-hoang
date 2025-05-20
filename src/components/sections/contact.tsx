@@ -52,7 +52,7 @@ export function Contact() {
 
   async function onSubmit(values: FormValues) {
     if (!recaptchaToken) {
-      toast.error("Please complete the captcha before sending.")
+      toast.error("Please complete the captcha before sending.", { style: { background: "red", color: "white" } })
       return
     }
     setIsSubmitting(true)
