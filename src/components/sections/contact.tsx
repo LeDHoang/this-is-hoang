@@ -18,6 +18,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
 import { useTheme } from "next-themes"
+import ReCAPTCHA from "react-google-recaptcha"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -36,6 +37,8 @@ type FormValues = z.infer<typeof formSchema>
 
 export function Contact() {
   const [isSubmitting, setIsSubmitting] = React.useState(false)
+  const [recaptchaToken, setRecaptchaToken] = React.useState<string | null>(null)
+  const recaptchaRef = React.useRef<ReCAPTCHA>(null)
   const { theme } = useTheme()
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -48,6 +51,10 @@ export function Contact() {
   })
 
   async function onSubmit(values: FormValues) {
+    if (!recaptchaToken) {
+      toast.error("Please complete the captcha before sending.")
+      return
+    }
     setIsSubmitting(true)
     try {
       const response = await fetch('/api/contact', {
@@ -55,11 +62,13 @@ export function Contact() {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify({ ...values, token: recaptchaToken }),
       })
       if (!response.ok) {
         throw new Error('Failed to send message')
       }
+      recaptchaRef.current?.reset()
+      setRecaptchaToken(null)
       toast.success('Message sent successfully!')
       form.reset()
     } catch (error) {
@@ -140,6 +149,13 @@ export function Contact() {
                     </FormItem>
                   )}
                 />
+                <div className="mt-4 flex justify-center">
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!}
+                    onChange={(token: string | null) => setRecaptchaToken(token)}
+                    ref={recaptchaRef}
+                  />
+                </div>
                 <Button type="submit" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </Button>
