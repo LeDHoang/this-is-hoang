@@ -6,6 +6,7 @@ import { Toaster } from "sonner";
 import { Footer } from "@/components/ui/footer";
 import { Eye } from "@mynaui/icons-react";
 import { Navigation } from "@/components/navigation";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +53,7 @@ export default function RootLayout({
               license: "All rights reserved - We are always watching",
             }}
           />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
