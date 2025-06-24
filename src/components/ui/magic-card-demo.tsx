@@ -46,17 +46,17 @@ export function MagicCardDemo() {
           </div>
         </MagicCard>
         <MagicCard
-          className="cursor-pointer flex items-center justify-center shadow-2xl p-4 h-full"
+          className="cursor-pointer flex items-center justify-center shadow-2xl p-2 sm:p-4 h-full"
           gradientColor={theme === "dark" ? "#262626" : "#D9D9D955"}
         >
           <div className="w-full h-full flex items-center justify-center">
-            <div className="w-full">
+            <div className="w-full max-w-full">
               <PaymentInputsDemo />
             </div>
           </div>
-          <div className="w-full mt-6">
-            <RadioGroup className="grid grid-cols-2 gap-2 w-full" defaultValue="mastercard">
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+          <div className="w-full mt-4 sm:mt-6">
+            <RadioGroup className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full" defaultValue="mastercard">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="mastercard" id={`${id}-mastercard`} className="order-1 after:absolute after:inset-0" />
                 <div className="flex grow items-center gap-3">
                   <svg className="shrink-0" width={32} height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -65,10 +65,10 @@ export function MagicCardDemo() {
                     <path d="M13.3359 12C13.3359 9.76408 14.3871 7.77961 16 6.49741C14.8129 5.56408 13.3155 5 11.6822 5C7.81295 5 4.68221 8.13074 4.68221 12C4.68221 15.8693 7.81295 19 11.6822 19C13.3155 19 14.8129 18.4359 16 17.5026C14.3848 16.2385 13.3359 14.2359 13.3359 12Z" fill="#EB001B" />
                     <path d="M27.3178 12C27.3178 15.8693 24.1871 19 20.3178 19C18.6845 19 17.1871 18.4359 16 17.5026C17.6333 16.2181 18.6641 14.2359 18.6641 12C18.6641 9.76408 17.6129 7.77961 16 6.49741C17.1848 5.56408 18.6822 5 20.3155 5C24.1871 5 27.3178 8.15113 27.3178 12Z" fill="#F79E1B" />
                   </svg>
-                  <Label htmlFor={`${id}-mastercard`}>Mastercard</Label>
+                  <Label htmlFor={`${id}-mastercard`} className="text-sm">Mastercard</Label>
                 </div>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="visa" id={`${id}-visa`} className="order-1 after:absolute after:inset-0" />
                 <div className="flex grow items-center gap-3">
                   <svg className="shrink-0" width={32} height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -84,7 +84,7 @@ export function MagicCardDemo() {
                       </clipPath>
                     </defs>
                   </svg>
-                  <Label htmlFor={`${id}-visa`}>Visa</Label>
+                  <Label htmlFor={`${id}-visa`} className="text-sm">Visa</Label>
                 </div>
               </div>
             </RadioGroup>
@@ -99,27 +99,27 @@ export function MagicCardDemo() {
                   setCustomPercent(Number(val))
                 }
               }}
-              className="grid grid-cols-5 gap-2 w-full"
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full"
             >
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="15" id={`${id}-15`} className="order-1 after:absolute after:inset-0" />
-                <Label htmlFor={`${id}-15`}>15%</Label>
+                <Label htmlFor={`${id}-15`} className="text-sm">15%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="20" id={`${id}-20`} className="order-1 after:absolute after:inset-0" />
-                <Label htmlFor={`${id}-20`}>20%</Label>
+                <Label htmlFor={`${id}-20`} className="text-sm">20%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="25" id={`${id}-25`} className="order-1 after:absolute after:inset-0" />
-                <Label htmlFor={`${id}-25`}>25%</Label>
+                <Label htmlFor={`${id}-25`} className="text-sm">25%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
                 <RadioGroupItem value="30" id={`${id}-30`} className="order-1 after:absolute after:inset-0" />
-                <Label htmlFor={`${id}-30`}>30%</Label>
+                <Label htmlFor={`${id}-30`} className="text-sm">30%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring col-span-2 sm:col-span-1">
                 <RadioGroupItem value="custom" id={`${id}-custom`} className="order-1 after:absolute after:inset-0" />
-                <Label htmlFor={`${id}-custom`}>Custom</Label>
+                <Label htmlFor={`${id}-custom`} className="text-sm">Custom</Label>
               </div>
             </RadioGroup>
           </div>
@@ -142,7 +142,7 @@ export function MagicCardDemo() {
               />
             </div>
           )}
-          <div className="w-full mt-4 p-4 rounded-lg border border-input shadow-sm shadow-black/5">
+          <div className="w-full mt-4 p-3 sm:p-4 rounded-lg border border-input shadow-sm shadow-black/5">
             <div className="flex justify-between text-sm mb-2">
               <span>Coffee fee (Co-fee)</span>
               <span>{"$" + (10000).toLocaleString()}</span>
@@ -154,21 +154,21 @@ export function MagicCardDemo() {
             <p className="text-xs text-muted-foreground mb-2">
               Tip = {percent === 'custom' ? customPercent : percent}% * {"$" + (10000).toLocaleString()}
             </p>
-            <div className="flex justify-between font-medium">
+            <div className="flex justify-between font-medium mb-4">
               <span>Total</span>
               <span>{"$" + ((10000 + ((percent === 'custom' ? customPercent : Number(percent)) / 100) * 10000)).toLocaleString(undefined, {maximumFractionDigits:2})}</span>
             </div>
-            <div className="flex justify-between items-center mt-4">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 w-full">
               <ParticleButton
                 successDuration={0}
-                className="bg-foreground text-background hover:bg-foreground/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 border border-transparent"
+                className="flex-1 bg-foreground text-background hover:bg-foreground/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 border border-transparent text-xs sm:text-sm px-2 sm:px-4"
                 onClick={() => setIsDialogOpen(true)}
               >
                 Coffee?? What is that!
               </ParticleButton>
               <ParticleButton
                 successDuration={1000}
-                className="bg-foreground text-background hover:bg-foreground/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 border border-transparent"
+                className="flex-1 bg-foreground text-background hover:bg-foreground/90 dark:bg-foreground dark:text-background dark:hover:bg-foreground/90 border border-transparent text-xs sm:text-sm px-2 sm:px-4"
               >
                 Buy me a coffee
               </ParticleButton>
