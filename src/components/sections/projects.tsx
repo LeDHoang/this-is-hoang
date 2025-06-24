@@ -124,8 +124,8 @@ export function Projects() {
                 </div>
               </>
             ) : (
-              <div className="w-full overflow-auto pb-4">
-                <div className="flex space-x-6 p-2">
+              <div className="w-full pb-4 overflow-x-auto">
+                <div className="flex space-x-6 p-2 max-w-full">
                   {sortedProjects
                     .filter((project) => project.category === category)
                     .map((project) => {
@@ -139,8 +139,12 @@ export function Projects() {
                         <Card
                           key={project.title}
                           className={cn(
-                            "card-hover rounded-md overflow-hidden w-[350px] min-w-[350px] flex-shrink-0 transition-all duration-300",
-                            expandedCard === project.title && "expanded w-[600px] min-w-[600px]"
+                            "card-hover rounded-md overflow-hidden transition-all duration-300",
+                            // Mobile: full width, only expand vertically
+                            "w-full flex-shrink-0",
+                            // Desktop: fixed width with horizontal expansion
+                            "md:w-[350px] md:min-w-[350px]",
+                            expandedCard === project.title && "md:w-[600px] md:min-w-[600px]"
                           )}
                         >
                           <CardHeader>
