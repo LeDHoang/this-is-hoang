@@ -7,6 +7,7 @@ import { Footer } from "@/components/ui/footer";
 import { Eye } from "@mynaui/icons-react";
 import { Navigation } from "@/components/navigation";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -54,6 +55,7 @@ export default function RootLayout({
             }}
           />
           <SpeedInsights />
+          <Analytics />
         </ThemeProvider>
       </body>
     </html>
