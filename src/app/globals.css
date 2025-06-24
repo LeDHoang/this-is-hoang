@@ -162,9 +162,73 @@ body {
 @layer base {
   * {
     @apply border-0;
+    /* Performance optimizations */
+    box-sizing: border-box;
   }
+  
+  html {
+    /* Improve font rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    
+    /* Optimize scrolling */
+    scroll-behavior: smooth;
+  }
+  
   body {
     @apply bg-background text-foreground;
+    /* Prevent layout shifts */
+    min-height: 100vh;
+    /* Optimize animations */
+    transform: translateZ(0);
+  }
+  
+  /* Optimize images and videos for better CLS */
+  img, video {
+    height: auto;
+    max-width: 100%;
+    /* Prevent layout shift during loading */
+    aspect-ratio: attr(width) / attr(height);
+  }
+  
+  /* Optimize loading states */
+  .loading-skeleton {
+    background: linear-gradient(90deg, 
+      rgba(255, 255, 255, 0.1) 25%, 
+      rgba(255, 255, 255, 0.2) 50%, 
+      rgba(255, 255, 255, 0.1) 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 2s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  /* Reduce motion for accessibility and performance */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+  
+  /* Optimize will-change for animations */
+  .animate-pulse, .animate-spin, .animate-bounce {
+    will-change: opacity, transform;
+  }
+  
+  /* Container query optimization */
+  .container {
+    container-type: inline-size;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
 }
 
