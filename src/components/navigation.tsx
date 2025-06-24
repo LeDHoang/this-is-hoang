@@ -7,7 +7,7 @@ export function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const navItems = [
     { label: "home", href: "/#home" },
-    { label: "project", href: "/#projects" },
+    { label: "projects", href: "/projects" },
     { label: "experience", href: "/#experience" },
     { label: "blog", href: "/blog" },
   ]
