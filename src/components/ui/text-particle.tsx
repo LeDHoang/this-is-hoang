@@ -175,7 +175,7 @@ export function TextParticle({
     }
   }, [particles, mouse, backgroundColor])
 
-  // Mouse interaction
+  // Mouse and touch interaction
   const handleMouseMove = (e: React.MouseEvent<HTMLCanvasElement>) => {
     const canvas = canvasRef.current
     if (!canvas) return
@@ -191,12 +191,48 @@ export function TextParticle({
     setMouse({ x: null, y: null })
   }
 
+  // Touch event handlers for mobile devices
+  const handleTouchStart = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const touch = e.touches[0]
+    setMouse({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    })
+  }
+
+  const handleTouchMove = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    const canvas = canvasRef.current
+    if (!canvas) return
+
+    const rect = canvas.getBoundingClientRect()
+    const touch = e.touches[0]
+    setMouse({
+      x: touch.clientX - rect.left,
+      y: touch.clientY - rect.top,
+    })
+  }
+
+  const handleTouchEnd = (e: React.TouchEvent<HTMLCanvasElement>) => {
+    e.preventDefault()
+    setMouse({ x: null, y: null })
+  }
+
   return (
     <canvas
       ref={canvasRef}
       className={`w-full h-full ${className}`}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      style={{ touchAction: 'none' }}
     />
   )
 } 

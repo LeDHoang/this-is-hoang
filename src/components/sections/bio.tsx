@@ -66,8 +66,8 @@ export function Bio() {
   return (
     <Terminal id="bio" className="w-full max-w-4xl mx-auto my-8" showPrompt={false}>
       <div className="w-full">
-        <div className="flex items-start gap-8 w-full">
-          <div className="relative w-48 h-48 rounded-full overflow-hidden flex-shrink-0">
+        <div className="flex flex-col md:flex-row md:items-start gap-6 md:gap-8 w-full">
+          <div className="relative w-32 h-32 md:w-48 md:h-48 rounded-full overflow-hidden flex-shrink-0 mx-auto md:mx-0">
             <Image
               src="/profile.jpg"
               alt="Hoang Le"
@@ -76,10 +76,10 @@ export function Bio() {
               priority
             />
           </div>
-          <div className="space-y-4 text-left w-full">
+          <div className="space-y-4 text-center md:text-left w-full">
             <div className="space-y-2">
-              <h1 className="text-4xl font-bold">Hoang Le</h1>
-              <p className="text-xl text-muted-foreground">
+              <h1 className="text-3xl md:text-4xl font-bold">Hoang Le</h1>
+              <p className="text-lg md:text-xl text-muted-foreground">
                 Machine Learning Engineer & Full Stack Developer
               </p>
               <p className="text-muted-foreground">Gainesville, FL</p>
@@ -91,7 +91,7 @@ export function Bio() {
                 typingSpeed={40}
               />
             </p>
-            <div className="flex flex-wrap gap-4">
+            <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <a
                 href="https://github.com/LeDHoang"
                 target="_blank"
