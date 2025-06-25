@@ -22,7 +22,7 @@ const skillGroups = [
       { name: "PyTorch", level: "Expert" },
       { name: "React", level: "Advanced" },
       { name: "Next.js", level: "Advanced" },
-      { name: "scikit-learn", level: "Expert" },
+      { name: "Scikit-learn", level: "Expert" },
       { name: "Pandas", level: "Expert" },
       { name: "NumPy", level: "Expert" }
     ]

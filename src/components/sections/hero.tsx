@@ -1,6 +1,13 @@
 "use client"
 
-import { TextParticle } from "@/components/ui/text-particle"
+import dynamic from "next/dynamic"
+const TextParticle = dynamic(
+  () => import("@/components/ui/text-particle").then((mod) => mod.TextParticle),
+  {
+    ssr: false,
+    loading: () => <div className="w-full h-full bg-muted rounded-lg animate-pulse" />,
+  }
+)
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 
