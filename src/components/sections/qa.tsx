@@ -54,7 +54,7 @@ export function QA() {
             <AccordionItem
               value={item.id}
               key={item.id}
-              className="rounded-lg border bg-background px-4 py-1"
+              className="rounded border-2 border-[rgba(0,255,140,0.5)] bg-background px-4 py-1"
             >
               <AccordionTrigger className="justify-start gap-3 py-2 text-[18px] leading-6 hover:no-underline [&>svg]:-order-1">
                 {item.title}

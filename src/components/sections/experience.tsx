@@ -102,7 +102,7 @@ export function Experience() {
               key={experience.id} 
               className={cn(
                 "relative transition-all duration-300",
-                expandedCard === experience.id && "ring-2 ring-primary"
+                expandedCard === experience.id && "ring-2 ring-[rgba(0,255,140,0.5)]"
               )}
             >
               <CardHeader>
@@ -118,7 +118,7 @@ export function Experience() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setExpandedCard(expandedCard === experience.id ? null : experience.id)}
-                    className="h-8 w-8"
+                    className="h-8 w-8 rounded border-2 border-[rgba(0,255,140,0.5)]"
                   >
                     {expandedCard === experience.id ? (
                       <ChevronUp className="h-4 w-4" />

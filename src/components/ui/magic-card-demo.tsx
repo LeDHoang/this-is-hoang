@@ -56,7 +56,7 @@ export function MagicCardDemo() {
           </div>
           <div className="w-full mt-4 sm:mt-6">
             <RadioGroup className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full" defaultValue="mastercard">
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="mastercard" id={`${id}-mastercard`} className="order-1 after:absolute after:inset-0" />
                 <div className="flex grow items-center gap-3">
                   <svg className="shrink-0" width={32} height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -68,7 +68,7 @@ export function MagicCardDemo() {
                   <Label htmlFor={`${id}-mastercard`} className="text-sm">Mastercard</Label>
                 </div>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="visa" id={`${id}-visa`} className="order-1 after:absolute after:inset-0" />
                 <div className="flex grow items-center gap-3">
                   <svg className="shrink-0" width={32} height={24} viewBox="0 0 32 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -101,23 +101,23 @@ export function MagicCardDemo() {
               }}
               className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2 w-full"
             >
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="15" id={`${id}-15`} className="order-1 after:absolute after:inset-0" />
                 <Label htmlFor={`${id}-15`} className="text-sm">15%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="20" id={`${id}-20`} className="order-1 after:absolute after:inset-0" />
                 <Label htmlFor={`${id}-20`} className="text-sm">20%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="25" id={`${id}-25`} className="order-1 after:absolute after:inset-0" />
                 <Label htmlFor={`${id}-25`} className="text-sm">25%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)]">
                 <RadioGroupItem value="30" id={`${id}-30`} className="order-1 after:absolute after:inset-0" />
                 <Label htmlFor={`${id}-30`} className="text-sm">30%</Label>
               </div>
-              <div className="relative flex items-center gap-2 rounded-lg border border-input p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-ring col-span-2 sm:col-span-1">
+              <div className="relative flex items-center gap-2 rounded border-2 border-[rgba(0,255,140,0.5)] p-3 sm:p-4 shadow-sm shadow-black/5 data-[state=checked]:border-[rgba(0,255,140,0.5)] col-span-2 sm:col-span-1">
                 <RadioGroupItem value="custom" id={`${id}-custom`} className="order-1 after:absolute after:inset-0" />
                 <Label htmlFor={`${id}-custom`} className="text-sm">Custom</Label>
               </div>
@@ -142,7 +142,7 @@ export function MagicCardDemo() {
               />
             </div>
           )}
-          <div className="w-full mt-4 p-3 sm:p-4 rounded-lg border border-input shadow-sm shadow-black/5">
+          <div className="w-full mt-4 p-3 sm:p-4 rounded border-2 border-[rgba(0,255,140,0.5)] shadow-sm shadow-black/5">
             <div className="flex justify-between text-sm mb-2">
               <span>Coffee fee (Co-fee)</span>
               <span>{"$" + (10000).toLocaleString()}</span>

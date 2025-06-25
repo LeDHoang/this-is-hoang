@@ -15,7 +15,7 @@ export function PaymentInputsDemo() {
   return (
     <div className="space-y-2 w-full max-w-full">
       <legend className="text-sm font-medium text-foreground">Card Details</legend>
-      <div className="rounded-lg shadow-sm shadow-black/5">
+      <div className="rounded border-2 border-[rgba(0,255,140,0.5)] shadow-sm shadow-black/5">
         <div className="relative focus-within:z-10">
           <Input
             className="peer rounded-b-none pe-9 shadow-none [direction:inherit] text-sm"
