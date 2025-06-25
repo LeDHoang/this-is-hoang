@@ -141,7 +141,7 @@ export function Contact() {
                       <FormControl>
                         <Textarea
                           placeholder="Your message..."
-                          className="min-h-[100px]"
+                          className="min-h-[100px] border-2 border-[rgba(0,255,140,0.5)]"
                           {...field}
                         />
                       </FormControl>
@@ -211,7 +211,7 @@ export function Contact() {
               </a>
             </div>
             
-            <div className="flex-grow flex flex-col justify-center pt-4 border-t mt-4">
+            <div className="flex-grow flex flex-col justify-center pt-4 border-t-2 border-t-[rgba(0,255,140,0.5)] mt-4">
               <div className="flex items-center justify-between relative top-[-40px]">
                 <div className="text-3xl font-bold italic text-primary">Go Gatorsss!!!</div>
                 <div className="relative w-1/2 overflow-visible z-10">

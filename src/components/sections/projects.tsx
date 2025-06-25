@@ -184,7 +184,7 @@ export function Projects() {
                               </div>
                               {expandedCard === project.title && (
                                 <div className="space-y-4 pt-4">
-                                  <Separator />
+                                  <Separator className="bg-[rgba(0,255,140,0.5)]" />
                                   <div className="space-y-2">
                                     <h4 className="font-semibold">Progress Logs</h4>
                                     <div className="space-y-2">
@@ -205,7 +205,7 @@ export function Projects() {
                                   </div>
                                 </div>
                               )}
-                              <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t pt-3 px-1">
+                              <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t-2 border-t-[rgba(0,255,140,0.5)] pt-3 px-1">
                                 {project.title === "Personal Portfolio Website" ? (
                                   <Button asChild variant="outline" className="px-2">
                                     <Link href="#bio" className="inline-flex items-center">

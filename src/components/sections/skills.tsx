@@ -8,7 +8,8 @@ const skillGroups = [
     title: "Programming Languages",
     skills: [
       { name: "Python", level: "Expert" },
-      { name: "JavaScript/TypeScript", level: "Advanced" },
+      { name: "JavaScript", level: "Advanced" },
+      { name: "TypeScript", level: "Advanced" },
       { name: "SQL", level: "Advanced" },
       { name: "R", level: "Intermediate" },
       { name: "C++", level: "Intermediate" }

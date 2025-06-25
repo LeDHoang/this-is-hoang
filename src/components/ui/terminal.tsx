@@ -13,7 +13,7 @@ export default function Terminal({
   children,
   className = '',
   showPrompt = true,
-  title = 'terminal',
+  title = 'terminal.sh',
   ...props
 }: TerminalProps) {
   return (
