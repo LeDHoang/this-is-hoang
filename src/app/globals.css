@@ -181,7 +181,6 @@ body {
     /* Prevent layout shifts */
     min-height: 100vh;
     /* Optimize animations */
-    transform: translateZ(0);
   }
   
   /* Optimize images and videos for better CLS */
