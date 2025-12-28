@@ -31,8 +31,8 @@ const skillGroups = [
     title: "Tools & Platforms",
     skills: [
       { name: "AWS", level: "Advanced" },
+      { name: "Azure", level: "Intermediate" },
       { name: "Docker", level: "Advanced" },
-      { name: "Kubernetes", level: "Intermediate" },
       { name: "Git", level: "Expert" },
       { name: "Linux", level: "Advanced" },
       { name: "Jupyter", level: "Expert" }

@@ -82,7 +82,7 @@ export function Bio() {
               <p className="text-lg md:text-xl text-muted-foreground">
                 Machine Learning Engineer & Full Stack Developer
               </p>
-              <p className="text-muted-foreground">Gainesville, FL</p>
+              <p className="text-muted-foreground">Ha Noi, Vietnam</p>
             </div>
             <p className="flex items-start text-muted-foreground">
               <span className="text-primary mr-2">$</span>
