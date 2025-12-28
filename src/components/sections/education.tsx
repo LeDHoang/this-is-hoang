@@ -2,23 +2,9 @@
 
 import * as React from "react"
 import Terminal from "@/components/ui/terminal"
+import { education, awards, certifications } from "@/lib/education"
 
 export function Education() {
-  const education = {
-    degree: "B.Sc. Computer Science",
-    institution: "University of Florida"
-  }
-
-  const awards = [
-    "Herbert Wertheim College of Engineering Dean's List",
-    "Sigma Alpha Mu Fraternity Gamma Tau Chapter"
-  ]
-
-  const certifications = [
-    "IBM AI Engineering Professional Certificate (Ongoing)",
-    "Ironhack Data Analytics Bootcamp"
-  ]
-
   return (
     <section id="education" className="space-y-6">
       <h2 className="text-3xl font-bold">Education</h2>
