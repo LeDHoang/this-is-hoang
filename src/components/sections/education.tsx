@@ -6,9 +6,7 @@ import Terminal from "@/components/ui/terminal"
 export function Education() {
   const education = {
     degree: "B.Sc. Computer Science",
-    institution: "University of Florida",
-    gpa: "3.6",
-    period: "Expected Aug 2025"
+    institution: "University of Florida"
   }
 
   const awards = [
@@ -34,14 +32,6 @@ export function Education() {
             <div className="flex items-center gap-2">
               <span className="text-primary text-[1.1rem]">$</span>
               <span className="text-white text-[1.1rem]">Minor - Business Administration</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-primary text-[1.1rem]">$</span>
-              <span className="text-white text-[1.1rem]">GPA: {education.gpa}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <span className="text-primary text-[1.1rem]">$</span>
-              <span className="text-white text-[1.1rem]">Period: {education.period}</span>
             </div>
           </div>
         </Terminal>

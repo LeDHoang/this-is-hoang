@@ -20,6 +20,7 @@ const skillGroups = [
     skills: [
       { name: "TensorFlow", level: "Expert" },
       { name: "PyTorch", level: "Expert" },
+      { name: "LangChain/LangGraph", level: "Advanced" },
       { name: "React", level: "Advanced" },
       { name: "Next.js", level: "Advanced" },
       { name: "Scikit-learn", level: "Expert" },
