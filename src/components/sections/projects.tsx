@@ -17,6 +17,7 @@ import { BrandGithub } from "@mynaui/icons-react"
 import Link from "next/link"
 import { projects, categories } from "@/lib/projects"
 import { createClient } from '@supabase/supabase-js';
+import { AnimatedTabs } from "@/components/ui/animated-tabs"
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -25,6 +26,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 export function Projects() {
   const [expandedCard, setExpandedCard] = useState<string | null>(null)
+  const [activeCategory, setActiveCategory] = useState(categories[0])
   const monthMap: Record<string, number> = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6, Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12 }
   const sortedProjects = projects.slice().sort((a, b) => {
     if (a.date === 'Current Project') return -1
@@ -39,25 +41,22 @@ export function Projects() {
   return (
     <section id="projects" className="space-y-6">
       <h2 className="text-3xl font-bold">Projects</h2>
-      <Tabs defaultValue={categories[0]} className="w-full">
-        <ScrollArea className="w-full whitespace-nowrap">
-          <TabsList className="inline-flex h-10 items-center justify-center rounded border-2 border-[rgba(0,255,140,0.5)] bg-muted p-1 text-muted-foreground">
-            {categories.map((category) => (
-              <TabsTrigger
-                key={category}
-                value={category}
-                className="inline-flex items-center justify-center whitespace-nowrap rounded px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm data-[state=active]:border-2 data-[state=active]:border-[rgba(0,255,140,0.5)] data-[state=active]:z-10 relative"
-              >
-                {category}
-              </TabsTrigger>
-            ))}
-          </TabsList>
+      <div className="w-full">
+        <ScrollArea className="w-full whitespace-nowrap pb-4">
+          <div className="flex justify-center min-w-full">
+            <AnimatedTabs 
+              tabs={categories} 
+              activeTab={activeCategory} 
+              onTabChange={setActiveCategory}
+            />
+          </div>
           <ScrollBar orientation="horizontal" />
         </ScrollArea>
-        {categories.map((category) => (
-          <TabsContent key={category} value={category} className="mt-6">
-            {category === "Photography" ? (
-              <>
+        
+        <div className="mt-6">
+          {/* Photography Special Layout */}
+          {activeCategory === "Photography" ? (
+             <>
                 <InteractiveBentoGallery
                   mediaItems={[
                     {
@@ -124,103 +123,146 @@ export function Projects() {
                   <ThreeDPhotoCarousel />
                 </div>
               </>
-            ) : (
-              <div className="w-full pb-4 overflow-x-auto">
+          ) : (
+             <div className="w-full pb-4 overflow-x-auto">
                 <div className="flex space-x-6 p-2 max-w-full">
-                  {sortedProjects
-                    .filter((project) => project.category === category)
-                    .map((project) => {
-                      const slug = project.title
+            {sortedProjects
+              .filter((project) => activeCategory === "All" || project.category === activeCategory)
+              .map((project, index) => {
+                 const slug = project.title
                         .toLowerCase()
                         .replace(/\s+/g, '-')
                         .replace(/[^a-z0-9-]/g, '')
                         .replace(/-+/g, '-')
                         .replace(/^-+|-+$/g, '');
-                      return (
-                        <Card
-                          key={project.title}
-                          className={cn(
-                            "card-hover rounded-md overflow-hidden transition-all duration-300",
-                            // Mobile: full width, only expand vertically
-                            "w-full flex-shrink-0",
-                            // Desktop: fixed width with horizontal expansion
-                            "md:w-[350px] md:min-w-[350px]",
-                            expandedCard === project.title && "md:w-[600px] md:min-w-[600px]"
-                          )}
+                 return (
+                <Card 
+                  key={index}
+                  className={cn(
+                    "card-hover rounded-md overflow-hidden transition-all duration-300",
+                    // Mobile: full width, only expand vertically
+                    "w-full flex-shrink-0",
+                    // Desktop: fixed width with horizontal expansion
+                    "md:w-[350px] md:min-w-[350px]",
+                    expandedCard === project.title && "md:w-[600px] md:min-w-[600px]"
+                  )}
+                >
+                  <CardHeader>
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <CardTitle className="glitch" data-text={project.title}>{project.title}</CardTitle>
+                        <CardDescription>{project.date}</CardDescription>
+                      </div>
+                      <div className="flex gap-2">
+                        {project.link && (
+                          <Link href={project.link} target="_blank" rel="noopener noreferrer">
+                            <Button variant="ghost" size="icon">
+                              {project.link.includes('github') ? <BrandGithub className="h-5 w-5" /> : <ExternalLink className="h-5 w-5" />}
+                            </Button>
+                          </Link>
+                        )}
+                        <Button
+                          variant="ghost"
+                          size="icon"
+                          onClick={() => setExpandedCard(expandedCard === project.title ? null : project.title)}
                         >
-                          <CardHeader>
-                            <div className="flex justify-between items-start">
-                              <div>
-                                <CardTitle className="glitch" data-text={project.title}>{project.title}</CardTitle>
-                                <CardDescription>{project.date}</CardDescription>
-                                {project.link.includes('github.com') && (
-                                  <Button asChild variant="outline" size="icon" aria-label="View Project" className="mt-1">
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                      <BrandGithub className="h-4 w-4" />
-                                    </a>
-                                  </Button>
-                                )}
-                              </div>
-                              <Button
-                                variant="ghost"
-                                size="icon"
-                                onClick={() => setExpandedCard(expandedCard === project.title ? null : project.title)}
-                                className="h-8 w-8"
-                              >
-                                {expandedCard === project.title ? (
-                                  <ChevronUp className="h-4 w-4" />
-                                ) : (
-                                  <ChevronDown className="h-4 w-4" />
-                                )}
-                              </Button>
-                            </div>
-                          </CardHeader>
-                          <CardContent>
-                            <div className="space-y-4">
-                              <p className="text-sm text-muted-foreground">{project.summary}</p>
-                              <div className="flex flex-wrap gap-2">
-                                {project.techStack.map((tech) => (
-                                  <Badge key={tech} variant="secondary">
-                                    {tech}
-                                  </Badge>
-                                ))}
-                              </div>
-                              {expandedCard === project.title && (
-                                <div className="space-y-4 pt-4">
-                                  <Separator className="bg-[rgba(0,255,140,0.5)]" />
-                                  <div className="space-y-2">
-                                    <h4 className="font-semibold">Progress Logs</h4>
-                                    <div className="space-y-2">
-                                      {project.logs.map((log) => (
-                                        <div key={log.date} className="text-sm">
-                                          <span className="font-medium">{log.date}:</span> {log.note}
-                                        </div>
-                                      ))}
-                                    </div>
+                          {expandedCard === project.title ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                        </Button>
+                      </div>
+                    </div>
+                  </CardHeader>
+                  <CardContent className="flex-grow flex flex-col">
+                    <p className="mb-4 text-muted-foreground">{project.summary}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.techStack.map((tech) => (
+                        <Badge key={tech} variant="secondary">{tech}</Badge>
+                      ))}
+                    </div>
+                    {expandedCard === project.title && (
+                      <div className="mt-4 space-y-4 animate-in fade-in zoom-in duration-300">
+                        <Separator className="bg-[rgba(0,255,140,0.5)]" />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                          <div>
+                            <h4 className="font-semibold mb-2">Key Achievements</h4>
+                            <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
+                              {project.achievements.map((achievement, i) => (
+                                <li key={i}>{achievement}</li>
+                              ))}
+                            </ul>
+                          </div>
+                          <div>
+                            <h4 className="font-semibold mb-2">Project Logs</h4>
+                            <ScrollArea className="h-[200px] w-full rounded-md border p-4">
+                              {project.logs.map((log, i) => (
+                                <div key={i} className="mb-4 last:mb-0">
+                                  <div className="flex justify-between items-baseline mb-1">
+                                    <span className="text-sm font-medium">{log.date}</span>
                                   </div>
-                                  <div className="space-y-2">
-                                    <h4 className="font-semibold">Achievements</h4>
-                                    <ul className="list-disc list-inside space-y-1 text-sm">
-                                      {project.achievements.map((achievement) => (
-                                        <li key={achievement}>{achievement}</li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                  {project.demoGif && (
-                                    <div className="mt-4 rounded-md overflow-hidden border border-[rgba(0,255,140,0.3)]">
-                                      <Image 
-                                        src={project.demoGif} 
-                                        alt={`${project.title} Demo`}
-                                        width={800}
-                                        height={450}
-                                        className="w-full h-auto"
-                                        unoptimized
-                                      />
-                                    </div>
-                                  )}
+                                  <p className="text-sm text-muted-foreground">{log.note}</p>
                                 </div>
-                              )}
-                              <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t-2 border-t-[rgba(0,255,140,0.5)] pt-3 px-1">
+                              ))}
+                            </ScrollArea>
+                          </div>
+                        </div>
+                        <div className="mt-6 flex justify-end">
+                            <Link href={`/projects/${project.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}/changelog`}>
+                                <Button variant="outline" className="gap-2">
+                                    View Full Changelog
+                                    <ExternalLink className="h-4 w-4" />
+                                </Button>
+                            </Link>
+                        </div>
+
+                        {/* Visual Content Section */}
+                        <div className="mt-8 space-y-8">
+                          {/* Bento Grid Gallery */}
+                          {project.title === "OneAgent - Query Agent for Enterprise Data" && (
+                            <InteractiveBentoGallery
+                              mediaItems={[
+                                {
+                                  id: 1,
+                                  type: 'image',
+                                  title: 'Agent Architecture',
+                                  desc: 'LangGraph multi-agent orchestration',
+                                  url: '/footage/photo/demo.gif', // Placeholder
+                                  span: 'md:col-span-2 md:row-span-2'
+                                },
+                                {
+                                  id: 2,
+                                  type: 'video',
+                                  title: 'Live Demo',
+                                  desc: 'Real-time query processing',
+                                  url: 'https://www.youtube.com/embed/Wa_pmswdkzQ',
+                                  span: 'md:col-span-1 md:row-span-1'
+                                },
+                                {
+                                  id: 3,
+                                  type: 'image',
+                                  title: 'Presentation',
+                                  desc: 'System design slides',
+                                  url: '/footage/photo/demo.gif', // Placeholder
+                                  span: 'md:col-span-1 md:row-span-1'
+                                },
+                              ]}
+                              title="Project Gallery"
+                              description="Visual overview of the OneAgent system architecture and capabilities."
+                            />
+                          )}
+
+                          {/* 3D Carousel for other projects if they have multiple images */}
+                          {project.title !== "OneAgent - Query Agent for Enterprise Data" && (
+                            <ThreeDPhotoCarousel 
+                              images={[
+                                '/footage/photo/demo.gif', // Placeholders
+                                '/footage/photo/demo.gif',
+                                '/footage/photo/demo.gif',
+                              ]}
+                            />
+                          )}
+                        </div>
+                      </div>
+                    )}
+                                 <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t-2 border-t-[rgba(0,255,140,0.5)] pt-3 px-1">
                                 {project.title === "Personal Portfolio Website" ? (
                                   <Button asChild variant="outline" className="px-2">
                                     <Link href="#bio" className="inline-flex items-center">
@@ -256,17 +298,14 @@ export function Projects() {
                                   </Button>
                                 )}
                               </div>
-                            </div>
-                          </CardContent>
-                        </Card>
-                      );
-                    })}
-                </div>
-              </div>
-            )}
-          </TabsContent>
-        ))}
-      </Tabs>
+                  </CardContent>
+                </Card>
+              )})}
+          </div>
+          </div>
+          )}
+        </div>
+      </div>
     </section>
   )
 } 

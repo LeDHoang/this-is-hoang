@@ -35,7 +35,7 @@ export const skillGroups = [
     ]
   },
   {
-    title: "Domains/Concepts",
+    title: "Domains & Concepts",
     skills: [
       { name: "Machine Learning", level: "Expert" },
       { name: "Deep Learning", level: "Expert" },
