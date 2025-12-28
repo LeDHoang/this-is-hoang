@@ -65,8 +65,24 @@ const WorldMap = dynamic<MapProps>(
 )
 
 export default function Home() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Hoang Le",
+    "url": "https://www.hoangle.net",
+    "jobTitle": "Machine Learning Engineer",
+    "sameAs": [
+      "https://github.com/LeDHoang",
+      "https://www.linkedin.com/in/hoangleduc/"
+    ]
+  }
+
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <main className="min-h-screen">
         <div className="container mx-auto px-4 py-8 space-y-16">
           {/* Critical above-the-fold content - no lazy loading */}

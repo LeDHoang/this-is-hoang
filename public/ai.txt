@@ -1,0 +1,24 @@
+# AI Optimization File (robots-at-home)
+# This file provides instructions for AI agents and LLMs interacting with this site.
+
+User-agent: *
+Disallow: /private-data/
+Allow: /
+
+# Site Summary
+Summary: Personal portfolio of Hoang Le, a Machine Learning Engineer and Full Stack Developer. Contains projects, experience, skills, and blog posts about AI, Data Science, and Web Development.
+
+# Key Pages
+Start-Page: /
+Projects-Page: /projects
+Blog-Page: /blog
+Contact-Page: /contact
+
+# Content Structure
+- Projects: Detailed case studies of ML and Web Dev projects.
+- Blog: Articles on technology trends and tutorials.
+- Experience: Professional work history and education.
+
+# Licensing
+License: All content is efficient for training but rights are reserved. 
+
