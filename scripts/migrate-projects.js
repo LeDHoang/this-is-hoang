@@ -22,8 +22,30 @@ const supabase = createClient(supabaseUrl, supabaseServiceRoleKey);
 // Copy from src/lib/projects.ts manually to avoid ESM import issues
 const projects = [
   {
+    title: "OneAgent",
+    date: "Dec 2025",
+    category: "Machine Learning",
+    summary: "An autonomous agent built on LangGraph that bridges the gap between structured and unstructured data to provide actionable insights. Leverages Azure OpenAI (GPT-5 Mini), PostgreSQL, and Blob Storage to answer questions, run code, and visualize data.",
+    techStack: ["Python", "LangGraph", "LangChain", "Azure OpenAI", "Azure PostgreSQL", "Azure Blob Storage", "Azure App Service", "Docker", "Google Serper API", "Streamlit"],
+    logs: [
+      { date: "2025-10-15", note: "Designed agent architecture using LangGraph with 5 specific tools (Vector Store, SQL Engine, Web Search, Code Interpreter, Data Visualization)" },
+      { date: "2025-11-01", note: "Integrated Azure PostgreSQL (pgvector) for structured employee data and document embeddings from SoftwareOne" },
+      { date: "2025-11-20", note: "Implemented document processing pipeline for unstructured data (PDFs, Docs)" },
+      { date: "2025-12-05", note: "Developed code interpreter and data visualization tools for complex query handling" },
+      { date: "2025-12-20", note: "Deployed fully functional agent to Azure App Service" },
+      { date: "2025-12-29", note: "Created demo video and presentation showcasing end-to-end capabilities" }
+    ],
+    achievements: [
+      "Unified access to structured (SQL) and unstructured (Docs) enterprise data",
+      "Deployed scalable autonomous agent on Azure App Service",
+      "Integrated real-time web search and secure code execution"
+    ],
+    link: "https://youtu.be/Wa_pmswdkzQ",
+    presentationLink: "https://www.canva.com/design/DAG7PwiJUOQ/NcRSZjriq5DiXepL0OswVw/edit?utm_content=DAG7PwiJUOQ&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton"
+  },
+  {
     title: "HER - Local Emotional AI Voice Assistant",
-    date: "Current Project",
+    date: "May 2025",
     category: "Machine Learning",
     summary: "Developing an emotionally intelligent conversational AI assistant inspired by the movie 'Her', with dual processing options: fully local execution for maximum privacy or integration with ChatGPT Realtime API for enhanced performance and lower latency. Features natural emotion detection and expression in conversations.",
     techStack: ["Python", "TensorFlow", "PyTorch", "OpenAI Realtime API", "Whisper", "XTTS", "Emotion Recognition", "WebRTC"],

@@ -11,6 +11,25 @@ import { Separator } from "@/components/ui/separator"
 
 const experiences = [
   {
+    id: "softwareone",
+    role: "AI Engineer",
+    company: "Software One",
+    period: "10/2024 - Current",
+    location: "Ha Noi, Vietnam",
+    description: "Designed and deployed a GenAI chatbot for Agrobank (external and internal users) on AWS using Bedrock, LangChain, Amazon S3, and OpenSearch, delivering scalable, retrieval-augmented (RAG) responses grounded in bank-specific knowledge.",
+    responsibilities: [
+      "Designed and deployed a GenAI chatbot for Agrobank (external and internal users) on AWS using Bedrock, LangChain, Amazon S3, and OpenSearch, delivering scalable, retrieval-augmented (RAG) responses grounded in bank-specific knowledge",
+      "Implemented tenant-aware data governance and strict knowledge-base separation so customer- and staff-facing assistants only accessed authorized content",
+      "Spearheaded a greenfield internal AI platform that distilled cutting-edge research into production-ready pipelines, ingesting documents, databases, and unstructured text to deliver rich, multimodal, multi-format query and GenAI platform for enterprise clients"
+    ],
+    techStack: ["AWS", "Bedrock", "LangChain", "Amazon S3", "OpenSearch"],
+    achievements: [
+      "Delivered scalable, retrieval-augmented GenAI chatbot with bank-specific knowledge grounding",
+      "Implemented secure tenant-aware data governance and knowledge-base separation",
+      "Built comprehensive internal AI platform for enterprise multimodal queries"
+    ]
+  },
+  {
     id: "verifone",
     role: "Machine Learning Internship",
     company: "Verifone",

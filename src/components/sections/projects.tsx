@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import Image from "next/image"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area"
@@ -152,11 +153,13 @@ export function Projects() {
                               <div>
                                 <CardTitle className="glitch" data-text={project.title}>{project.title}</CardTitle>
                                 <CardDescription>{project.date}</CardDescription>
-                                <Button asChild variant="outline" size="icon" aria-label="View Project" className="mt-1">
-                                  <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                    <BrandGithub className="h-4 w-4" />
-                                  </a>
-                                </Button>
+                                {project.link.includes('github.com') && (
+                                  <Button asChild variant="outline" size="icon" aria-label="View Project" className="mt-1">
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                      <BrandGithub className="h-4 w-4" />
+                                    </a>
+                                  </Button>
+                                )}
                               </div>
                               <Button
                                 variant="ghost"
@@ -203,6 +206,18 @@ export function Projects() {
                                       ))}
                                     </ul>
                                   </div>
+                                  {project.demoGif && (
+                                    <div className="mt-4 rounded-md overflow-hidden border border-[rgba(0,255,140,0.3)]">
+                                      <Image 
+                                        src={project.demoGif} 
+                                        alt={`${project.title} Demo`}
+                                        width={800}
+                                        height={450}
+                                        className="w-full h-auto"
+                                        unoptimized
+                                      />
+                                    </div>
+                                  )}
                                 </div>
                               )}
                               <div className="flex flex-row flex-wrap justify-center gap-x-4 gap-y-2 mt-4 w-full border-t-2 border-t-[rgba(0,255,140,0.5)] pt-3 px-1">
@@ -217,6 +232,13 @@ export function Projects() {
                                     <Link href={`/projects/${slug}/changelog`} className="inline-flex items-center">
                                       Changelog <ExternalLink className="ml-1 h-4 w-4" />
                                     </Link>
+                                  </Button>
+                                )}
+                                {(project.link.includes('youtube.com') || project.link.includes('youtu.be')) && (
+                                  <Button asChild variant="outline" className="px-2">
+                                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center">
+                                      Demo <ExternalLink className="ml-1 h-4 w-4" />
+                                    </a>
                                   </Button>
                                 )}
                                 {project.presentationLink && (
