@@ -75,7 +75,7 @@ const experiences = [
   {
     id: "its",
     role: "Machine Learning Internship",
-    company: "Institute of Technology and Science",
+    company: "VKIST - Vietnam Korea Institute of Technology and Science",
     period: "May 2022 - July 2022",
     location: "Ha Noi, Vietnam",
     description: "Developed a facial identification system for touch-free COVID-safe applications.",

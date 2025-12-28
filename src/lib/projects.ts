@@ -21,7 +21,7 @@ export const categories = [
 
 export const projects: Project[] = [
   {
-    title: "OneAgent - Autonomous Agent for Enterprise Data",
+    title: "OneAgent - Query Agent for Enterprise Data",
     date: "Dec 2025",
     category: "Machine Learning",
     summary: "An autonomous agent built on LangGraph that bridges the gap between structured and unstructured data to provide actionable insights. Leverages Azure OpenAI (GPT-5 Mini), PostgreSQL, and Blob Storage to answer questions, run code, and visualize data.",
